@@ -1,25 +1,31 @@
 package hyangyu.server.domain;
 
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
-public class FavoriteFair {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class FavoriteFestival {
 
     @EmbeddedId
-    private FavoriteFairId favoriteId;
+    private FavoriteFestivalId favoriteFestivalId;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Category category;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @MapsId("userId")
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("fairId")
-    private Fair fair;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @MapsId("festivalId")
+    @JoinColumn(name = "festival_id")
+    private Festival festival;
 
 }
