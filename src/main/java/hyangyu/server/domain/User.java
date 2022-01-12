@@ -8,10 +8,10 @@ import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -34,6 +34,6 @@ public class User {
 	@Column(length = 50)
 	private String sub;
 	
-	@Column(length = 100)
+	@Column(nullable = false, length = 100)
 	private String token;
 }
