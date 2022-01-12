@@ -1,2 +1,5 @@
-package hyangyu.server.domain;public enum Category {
+package hyangyu.server.domain;
+
+public enum Category {
+    Display, Fair, Festival
 }
