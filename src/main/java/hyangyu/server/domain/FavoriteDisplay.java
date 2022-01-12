@@ -6,21 +6,22 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-public class Favorite {
+public class FavoriteDisplay {
 
-    //@Id 애노테이션 빼고 복합키 설정, 단방향 맵핑 @ManyToOne(mappedBy 필요없음, 연관관계는 무조건 객체에다 하면됨)
     @EmbeddedId
-    private FavoriteDisplayId favoriteId;
+    private FavoriteDisplayId favoriteDisplayId;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Category category;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @MapsId("userId")
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("eventId")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @MapsId("displayId")
+    @JoinColumn(name = "display_id")
     private Display display;
 
 }
