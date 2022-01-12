@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,18 +24,22 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long userId;
 	
-	@Column(nullable = false, length = 50)
+	@NotNull
+	@Column(length = 50)
 	private String email;
 	
-	@Column(nullable = false, length = 200)
+	@NotNull
+	@Column(length = 200)
 	private String password;
 	
-	@Column(nullable = false, length = 10)
+	@NotNull
+	@Column(length = 10)
 	private String nickname;
 	
 	@Column(length = 50)
 	private String sub;
 	
-	@Column(nullable = false, length = 100)
+	@NotNull
+	@Column( length = 100)
 	private String token;
 }
