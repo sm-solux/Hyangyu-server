@@ -1,25 +1,30 @@
 package hyangyu.server.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
-public class FavoriteDisplay {
+public class FavoriteFair {
 
     @EmbeddedId
-    private FavoriteDisplayId favoriteId;
+    private FavoriteFairId privateFairId;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Category category;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @MapsId("userId")
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("displayId")
-    private Display display;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @MapsId("fairId")
+    @JoinColumn(name = "fair_id")
+    private Fair fair;
+
+
 
 }
