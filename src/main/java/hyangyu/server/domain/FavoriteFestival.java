@@ -15,9 +15,6 @@ public class FavoriteFestival {
     @EmbeddedId
     private FavoriteFestivalId favoriteFestivalId;
 
-    @Enumerated(EnumType.STRING)
-    private Category category;
-
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @MapsId("userId")
     @JoinColumn(name = "user_id")
@@ -27,5 +24,11 @@ public class FavoriteFestival {
     @MapsId("festivalId")
     @JoinColumn(name = "festival_id")
     private Festival festival;
+
+    //생성 메서드
+    public void saveFestival(User user, Festival festival) {
+        this.user = user;
+        this.festival = festival;
+    }
 
 }

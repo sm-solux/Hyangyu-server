@@ -10,10 +10,7 @@ import javax.persistence.*;
 public class FavoriteFair {
 
     @EmbeddedId
-    private FavoriteFairId privateFairId;
-
-    @Enumerated(EnumType.STRING)
-    private Category category;
+    private FavoriteFairId favoriteFairId;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @MapsId("userId")
@@ -25,6 +22,10 @@ public class FavoriteFair {
     @JoinColumn(name = "fair_id")
     private Fair fair;
 
-
+    //생성 메서드
+    public void saveFair(User user, Fair fair) {
+        this.user = user;
+        this.fair = fair;
+    }
 
 }

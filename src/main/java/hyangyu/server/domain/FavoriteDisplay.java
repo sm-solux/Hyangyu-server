@@ -11,9 +11,6 @@ public class FavoriteDisplay {
     @EmbeddedId
     private FavoriteDisplayId favoriteDisplayId;
 
-    @Enumerated(EnumType.STRING)
-    private Category category;
-
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @MapsId("userId")
     @JoinColumn(name = "user_id")
@@ -23,5 +20,11 @@ public class FavoriteDisplay {
     @MapsId("displayId")
     @JoinColumn(name = "display_id")
     private Display display;
+
+    //생성 메서드
+    public void saveDisplay(User user, Display display) {
+        this.user = user;
+        this.display = display;
+    }
 
 }
