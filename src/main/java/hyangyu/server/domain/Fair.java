@@ -68,6 +68,7 @@ public class Fair {
     @NotEmpty
     private int price;
 
+    //생성 메서드
     @Builder
     public void createFair(EventDto eventDto) {
         this.startDate = eventDto.getStartDate();

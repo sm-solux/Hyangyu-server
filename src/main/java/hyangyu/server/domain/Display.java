@@ -69,6 +69,7 @@ public class Display {
     @NotEmpty
     private int price;
 
+    //생성 메서드
     @Builder
     public void createDisplay(EventDto eventDto) {
         this.startDate = eventDto.getStartDate();

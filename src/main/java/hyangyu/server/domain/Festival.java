@@ -68,6 +68,7 @@ public class Festival {
     @NotEmpty
     private int price;
 
+    //생성 메서드
     @Builder
     public void createFestival(EventDto eventDto) {
         this.startDate = eventDto.getStartDate();
