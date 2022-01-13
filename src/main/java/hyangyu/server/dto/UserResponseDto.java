@@ -1,21 +1,19 @@
 package hyangyu.server.dto;
 
-import hyangyu.server.domain.User;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
+@Data
 public class UserResponseDto {
-	private final Long userId;
-	private final String email;
-	private final String nickname;
-	private final String sub;
-	private final String token;
+
+	private StatusEnum status;
+	private String message;
+	private Object data;
+	private String jwt;
 	
-	public UserResponseDto(User user) {
-		this.userId = user.getUserId();
-		this.email = user.getEmail();
-		this.nickname = user.getNickname();
-		this.sub = user.getSub();
-		this.token = user.getToken();
+	public UserResponseDto() {
+		this.status = StatusEnum.BAD_REQUEST;
+		this.message = null;
+		this.data = null;
+		this.jwt = null;
 	}
 }
