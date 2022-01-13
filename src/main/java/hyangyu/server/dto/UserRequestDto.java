@@ -13,17 +13,20 @@ public class UserRequestDto {
 
 	private String email;
 	private String nickname;
+	private String password;
 	
 	@Builder
-	public UserRequestDto(String email, String nickname) {
+	public UserRequestDto(String email, String nickname, String password) {
 		this.email = email;
 		this.nickname = nickname;
+		this.password = password;
 	}
 	
 	public User toEntity() {
 		return User.builder()
 				.email(email)
 				.nickname(nickname)
+				.password(password)
 				.build();
 	}
 	
