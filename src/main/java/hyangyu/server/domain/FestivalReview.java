@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class FestivalReview {
 
@@ -22,13 +21,16 @@ public class FestivalReview {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "user_id")
+    @NotNull
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "festival_id")
+    @NotNull
     private Festival festival;
 
     @NotNull
+    @Column(length = 20)
     private String nickname;
 
     @NotNull
@@ -36,8 +38,20 @@ public class FestivalReview {
     private LocalDateTime createTime;
 
     @NotNull
+    @Column(length = 300)
     private String content;
 
     @NotNull
     private Integer score;
+
+    // 생성 메서드
+    public void saveFestivalReview(Long reviewId, User user, Festival festival, String nickname, LocalDateTime createTime, String content, Integer score) {
+        this.reviewId = reviewId;
+        this.user = user;
+        this.festival = festival;
+        this.nickname = nickname;
+        this.createTime = createTime;
+        this.content = content;
+        this.score = score;
+    }
 }

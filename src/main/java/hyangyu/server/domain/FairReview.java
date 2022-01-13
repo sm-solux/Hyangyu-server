@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class FairReview {
 
@@ -22,13 +21,16 @@ public class FairReview {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "user_id")
+    @NotNull
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "fair_id")
+    @NotNull
     private Fair fair;
 
     @NotNull
+    @Column(length = 20)
     private String nickname;
 
     @NotNull
@@ -36,8 +38,20 @@ public class FairReview {
     private LocalDateTime createTime;
 
     @NotNull
+    @Column(length = 300)
     private String content;
 
     @NotNull
     private Integer score;
+
+    // 생성 메서드
+    public void saveFairReview(Long reviewId, User user, Fair fair, String nickname, LocalDateTime createTime, String content, Integer score) {
+        this.reviewId = reviewId;
+        this.user = user;
+        this.fair = fair;
+        this.nickname = nickname;
+        this.createTime = createTime;
+        this.content = content;
+        this.score = score;
+    }
 }
