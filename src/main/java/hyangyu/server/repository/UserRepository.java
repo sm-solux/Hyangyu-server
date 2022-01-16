@@ -10,5 +10,5 @@ import hyangyu.server.domain.User;
 public interface UserRepository extends JpaRepository<User, Long>{
 
 	@EntityGraph(attributePaths = "authorities")
-	   Optional<User> findOneWithAuthoritiesByUsername(String username);
+	   Optional<User> findByEmail(String email);
 }
