@@ -30,11 +30,11 @@ public class CustomUserDetailsService implements UserDetailsService {
          .orElseThrow(() -> new UsernameNotFoundException(email + " -> 데이터베이스에서 찾을 수 없습니다."));
    }
 
-   private org.springframework.security.core.userdetails.User createUser(String username, User user) {
+   private org.springframework.security.core.userdetails.User createUser(String email, User user) {
       List<GrantedAuthority> grantedAuthorities = user.getAuthorities().stream()
               .map(authority -> new SimpleGrantedAuthority(authority.getAuthorityName()))
               .collect(Collectors.toList());
-      return new org.springframework.security.core.userdetails.User(user.getUsername(),
+      return new org.springframework.security.core.userdetails.User(user.getEmail(),
               user.getPassword(),
               grantedAuthorities);
    }

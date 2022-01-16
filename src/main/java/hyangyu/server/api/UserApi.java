@@ -13,18 +13,13 @@ import javax.validation.Valid;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/api/UserController")
-public class UserController {
+@RequestMapping("/api/UserApi")
+public class UserApi {
     private final UserService userService;
 
-    public UserController(UserService userService) {
+    public UserApi(UserService userService) {
         this.userService = userService;
     }
-
-    /*@GetMapping("/hello")
-    public ResponseEntity<String> hello() {
-        return ResponseEntity.ok("hello");
-    }*/
 
     @PostMapping("/test-redirect")
     public void testRedirect(HttpServletResponse response) throws IOException {

@@ -20,21 +20,21 @@ public class UserDto {
 	@Size(max = 100)
 	private String email;
 	
-   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-   @NotNull
-   @Size(min = 8, max = 200)
-   private String password;
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@NotNull
+	@Size(min = 8, max = 200)
+	private String password;
 
-   @NotNull
-   @Size(min = 3, max = 10)
-   private String username;
+	@NotNull
+	@Size(min = 3, max = 10)
+	private String username;
 
-   private Set<AuthorityDto> authorityDtoSet;
+	private Set<AuthorityDto> authorityDtoSet;
 
-   public static UserDto from(User user) {
-      if(user == null) return null;
+public static UserDto from(User user) {
+	if(user == null) return null;
 
-      return UserDto.builder()
+	return UserDto.builder()
               .username(user.getUsername())
               .email(user.getEmail())
               .authorityDtoSet(user.getAuthorities().stream()
