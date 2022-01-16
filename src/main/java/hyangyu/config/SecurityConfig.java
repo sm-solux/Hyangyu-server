@@ -10,10 +10,10 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import hyangyu.jwt.JwtAccessDeniedHandler;
-import hyangyu.jwt.JwtAuthenticationEntryPoint;
-import hyangyu.jwt.JwtSecurityConfig;
-import hyangyu.jwt.TokenProvider;
+import hyangyu.server.jwt.JwtAccessDeniedHandler;
+import hyangyu.server.jwt.JwtAuthenticationEntryPoint;
+import hyangyu.server.jwt.JwtSecurityConfig;
+import hyangyu.server.jwt.TokenProvider;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)

@@ -42,7 +42,7 @@ public class User {
 	
 	@NotNull
 	@Column(length = 10)
-	private String nickname;
+	private String username;
 	
 	@ManyToMany
 	@JoinTable(

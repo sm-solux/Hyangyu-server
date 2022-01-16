@@ -1,4 +1,4 @@
-package hyangyu.jwt;
+package hyangyu.server.jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;

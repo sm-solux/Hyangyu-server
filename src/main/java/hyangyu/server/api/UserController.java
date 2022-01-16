@@ -17,7 +17,7 @@ import hyangyu.server.repository.UserRepository;
 
 @RestController
 public class UserController {
-	private UserRepository userRepository;
+private UserRepository userRepository;
 	
 	public UserController(UserRepository userRepository) {
 		this.userRepository = userRepository;
