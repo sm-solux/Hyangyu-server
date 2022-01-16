@@ -26,7 +26,6 @@ import lombok.Getter;
 @Entity
 public class User {
 
-	@JsonIgnore
 	@Id
 	@Column(name = "user_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

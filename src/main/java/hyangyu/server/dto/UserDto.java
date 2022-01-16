@@ -15,15 +15,14 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDto {
-
-
+	
 	@NotNull
 	@Size(max = 100)
 	private String email;
 	
    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
    @NotNull
-   @Size(min = 3, max = 100)
+   @Size(min = 8, max = 200)
    private String password;
 
    @NotNull
