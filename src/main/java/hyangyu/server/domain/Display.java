@@ -5,8 +5,10 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
@@ -16,7 +18,6 @@ import java.sql.Time;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-
 public class Display {
 
     @Id
@@ -70,24 +71,26 @@ public class Display {
     private int price;
 
     //생성 메서드
-    @Builder
-    public void createDisplay(EventDto eventDto) {
-        this.startDate = eventDto.getStartDate();
-        this.endDate = eventDto.getEndDate();
-        this.title = eventDto.getTitle();
-        this.likey = eventDto.getLikey();
-        this.reviews = eventDto.getReviews();
-        this.weekdayOpen = eventDto.getWeekdayOpen();
-        this.weekdayClose = eventDto.getWeekdayClose();
-        this.weekendOpen = eventDto.getWeekendOpen();
-        this.weekendClose = eventDto.getWeekendClose();
-        this.location = eventDto.getLocation();
-        this.site = eventDto.getSite();
-        this.holiday = eventDto.getHoliday();
-        this.content = eventDto.getContent();
-        this.photo1 = eventDto.getPhoto1();
-        this.photo2 = eventDto.getPhoto2();
-        this.photo3 = eventDto.getPhoto3();
-        this.price = eventDto.getPrice();
+    public static Display createDisplay(EventDto eventDto) {
+        Display display = new Display();
+        display.startDate = eventDto.getStartDate();
+        display.endDate = eventDto.getEndDate();
+        display.title = eventDto.getTitle();
+        display.likey = eventDto.getLikey();
+        display.reviews = eventDto.getReviews();
+        display.weekdayOpen = eventDto.getWeekdayOpen();
+        display.weekdayClose = eventDto.getWeekdayClose();
+        display.weekendOpen = eventDto.getWeekendOpen();
+        display.weekendClose = eventDto.getWeekendClose();
+        display.location = eventDto.getLocation();
+        display.site = eventDto.getSite();
+        display.holiday = eventDto.getHoliday();
+        display.content = eventDto.getContent();
+        display.photo1 = eventDto.getPhoto1();
+        display.photo2 = eventDto.getPhoto2();
+        display.photo3 = eventDto.getPhoto3();
+        display.price = eventDto.getPrice();
+
+        return display;
     }
 }

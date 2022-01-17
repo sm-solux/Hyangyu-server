@@ -49,5 +49,14 @@ public class User {
 			joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "user_id")},
 			inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
 	private Set<Authority> authorities;
+
+	public static User createUser(String email, String password, String username) {
+		User user = new User();
+		user.email = email;
+		user.password = password;
+		user.username = username;
+
+		return user;
+	}
 			
 }
