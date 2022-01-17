@@ -43,6 +43,15 @@ public class User {
 	@Column(length = 10)
 	private String username;
 	
+	
+	private String sub;
+	
+	@NotNull
+	private String token;
+	
+	@Column(length = 50)
+	private String image;
+	
 	@ManyToMany
 	@JoinTable(
 			name = "user_authority",
