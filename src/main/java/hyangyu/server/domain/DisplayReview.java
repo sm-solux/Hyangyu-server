@@ -42,13 +42,14 @@ public class DisplayReview {
     private Integer score;
 
     // 생성 메서드
-    public void saveDisplayReview(Long reviewId, User user, Display display, String nickname, LocalDateTime createTime, String content, Integer score) {
-        this.reviewId = reviewId;
-        this.user = user;
-        this.display = display;
-        this.nickname = nickname;
-        this.createTime = createTime;
-        this.content = content;
-        this.score = score;
+    public static DisplayReview createDisplayReview(User user, Display display, String nickname, LocalDateTime createTime, String content, Integer score) {
+        DisplayReview displayReview = new DisplayReview();
+        displayReview.user = user;
+        displayReview.display = display;
+        displayReview.nickname = nickname;
+        displayReview.createTime = createTime;
+        displayReview.content = content;
+        displayReview.score = score;
+        return displayReview;
     }
 }
