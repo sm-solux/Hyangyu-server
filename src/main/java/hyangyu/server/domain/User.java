@@ -43,7 +43,6 @@ public class User {
 	@Column(length = 10)
 	private String username;
 	
-	
 	private String sub;
 	
 	@NotNull
