@@ -9,12 +9,12 @@ import javax.persistence.EntityManager;
 
 @Repository
 @RequiredArgsConstructor
-public class FavoriteRepository {
+public class FavoriteDisplayRepository {
 
     private final EntityManager em;
 
-    public void saveFavoriteDisplay(FavoriteDisplayId favoriteDisplayId) {
-        em.persist(favoriteDisplayId);
+    public void saveFavoriteDisplay(FavoriteDisplay favoriteDisplay) {
+        em.persist(favoriteDisplay);
     }
 
     /*
