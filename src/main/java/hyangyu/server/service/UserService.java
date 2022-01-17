@@ -35,6 +35,9 @@ public class UserService {
         User user = User.builder()
         		.email(userDto.getEmail())
                 .username(userDto.getUsername())
+                .sub(userDto.getSub())
+                .token(userDto.getToken())
+                .image(userDto.getImage())
                 .password(passwordEncoder.encode(userDto.getPassword()))
                 .authorities(Collections.singleton(authority))
                 .build();
