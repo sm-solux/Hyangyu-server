@@ -44,6 +44,14 @@ public class UserService {
 
         return UserDto.from(userRepository.save(user));
     }
+    
+    public void modify(UserDto userDto) {
+    	User user = userRepository.findByEmail(userDto.getEmail()).orElseThrow(()-> 
+    		new IllegalArgumentException("해당 회원이 없습니다. id="+userDto.getEmail()));
+    	
+    	String encPassword =passwordEncoder.encode(userDto.getPassword());
+    	user.modify(userDto.getUsername(), encPassword);
+    }
 
     @Transactional(readOnly = true)
     public UserDto getUserWithAuthorities(String email) {

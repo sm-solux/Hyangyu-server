@@ -3,8 +3,14 @@ package hyangyu.server.api;
 import hyangyu.server.dto.UserDto;
 import hyangyu.server.domain.User;
 import hyangyu.server.service.UserService;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,9 +22,11 @@ import java.io.IOException;
 @RequestMapping("/api/UserApi")
 public class UserApi {
     private final UserService userService;
-
-    public UserApi(UserService userService) {
-        this.userService = userService;
+    private final AuthenticationManager authenticationManager;
+    
+    public UserApi(UserService userService, AuthenticationManager authenticationManager) {
+		this.userService = userService;
+		this.authenticationManager = authenticationManager;
     }
 
     @PostMapping("/test-redirect")
@@ -32,6 +40,16 @@ public class UserApi {
     ) {
         return ResponseEntity.ok(userService.signup(userDto));
     }
+    
+    @PutMapping("/modify")
+    public ResponseEntity<String> modify(@RequestBody UserDto userDto){
+    	userService.modify(userDto);
+    	Authentication authentication = authenticationManager.authenticate(
+    			new UsernamePasswordAuthenticationToken(userDto.getEmail(),userDto.getPassword()));
+    	SecurityContextHolder.getContext().setAuthentication(authentication);
+    	
+    	return new ResponseEntity<>("success", HttpStatus.OK);
+    }
 
     @GetMapping("/user")
     @PreAuthorize("hasAnyRole('USER','ADMIN')")
@@ -44,4 +62,5 @@ public class UserApi {
     public ResponseEntity<UserDto> getUserInfo(@PathVariable String email) {
         return ResponseEntity.ok(userService.getUserWithAuthorities(email));
     }
+    
 }

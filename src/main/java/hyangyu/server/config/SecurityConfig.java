@@ -1,6 +1,7 @@
 package hyangyu.server.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -38,16 +39,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	        this.jwtAccessDeniedHandler = jwtAccessDeniedHandler;
 	    }
 	  
+	  @Bean
+	  @Override
+	  public AuthenticationManager authenticationManagerBean() throws Exception{
+		  return super.authenticationManagerBean();
+	  }
 	    @Bean
 	    public PasswordEncoder passwordEncoder() {
 	        return new BCryptPasswordEncoder();
 	    }
-/*	@Override
-	public void configure(WebSecurity web) {
-		web
-					.ignoring()
-					.antMatchers(h2console안써서안해도되나?);
-	}*/
+
 	    @Override
 	    protected void configure(HttpSecurity httpSecurity) throws Exception {
 	        httpSecurity

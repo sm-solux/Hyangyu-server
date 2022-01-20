@@ -59,4 +59,8 @@ public class User {
 			inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
 	private Set<Authority> authorities;
 			
+	public void modify(String username, String password) {
+		this.username = username;
+		this.password = password;
+	}
 }
