@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -12,9 +13,11 @@ public class DisplayRepository {
 
     private final EntityManager em;
 
-    public void saveDisplay(Display display) { em.persist(display);}
+    public void saveDisplay(Display display) {
+        em.persist(display);
+    }
 
-    public Display findOne(Long displayId) {
-        return em.find(Display.class, displayId);
+    public Optional<Display> findOne(Long displayId) {
+        return Optional.ofNullable(em.find(Display.class, displayId));
     }
 }
