@@ -1,14 +1,13 @@
 package hyangyu.server.dto;
-
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
 import java.sql.Date;
 import java.sql.Time;
 
 @Data
+@AllArgsConstructor
 public class EventDto {
-    private Long eventId;
     private Date startDate;
     private Date endDate;
     private String title;
@@ -27,3 +26,5 @@ public class EventDto {
     private String photo3;
     private int price;
 }
+
+

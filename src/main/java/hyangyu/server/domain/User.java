@@ -12,8 +12,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -43,11 +41,31 @@ public class User {
 	@Column(length = 10)
 	private String username;
 	
+	private String sub;
+	
+	@NotNull
+	private String token;
+	
+	@Column(length = 50)
+	private String image;
+	
 	@ManyToMany
 	@JoinTable(
 			name = "user_authority",
 			joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "user_id")},
 			inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
 	private Set<Authority> authorities;
+
+	public static User createUser(String email, String password, String username, String sub, String token, String image) {
+		User user = new User();
+		user.email = email;
+		user.password = password;
+		user.username = username;
+		user.sub = sub;
+		user.token = token;
+		user.image = image;
+
+		return user;
+	}
 			
 }

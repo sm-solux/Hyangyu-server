@@ -35,6 +35,9 @@ public class UserService {
         User user = User.builder()
         		.email(userDto.getEmail())
                 .username(userDto.getUsername())
+                .sub(userDto.getSub())
+                .token(userDto.getToken())
+                .image(userDto.getImage())
                 .password(passwordEncoder.encode(userDto.getPassword()))
                 .authorities(Collections.singleton(authority))
                 .build();
@@ -50,5 +53,11 @@ public class UserService {
     @Transactional(readOnly = true)
     public UserDto getMyUserWithAuthorities() {
         return UserDto.from(SecurityUtil.getCurrentEmail().flatMap(userRepository::findByEmail).orElse(null));
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<User> findUser(Long userId) throws Exception {
+        Optional<User> user = userRepository.findByUserId(userId);
+        return user;
     }
 }

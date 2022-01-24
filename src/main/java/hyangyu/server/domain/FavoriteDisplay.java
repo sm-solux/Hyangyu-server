@@ -1,11 +1,14 @@
 package hyangyu.server.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class FavoriteDisplay {
 
     @EmbeddedId
@@ -21,10 +24,11 @@ public class FavoriteDisplay {
     @JoinColumn(name = "display_id")
     private Display display;
 
-    //생성 메서드
-    public void saveDisplay(User user, Display display) {
+    //생성자
+    public FavoriteDisplay(User user, Display display) {
+        FavoriteDisplayId favoriteDisplayId = new FavoriteDisplayId(user.getUserId(), display.getDisplayId());
+        this.favoriteDisplayId = favoriteDisplayId;
         this.user = user;
         this.display = display;
     }
-
 }

@@ -2,92 +2,92 @@ package hyangyu.server.domain;
 
 import hyangyu.server.dto.EventDto;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.sql.Time;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-
 public class Display {
 
     @Id
     @GeneratedValue
     private Long displayId;
 
-    @NotEmpty
+    @NotNull
     private Date startDate;
 
-    @NotEmpty
+    @NotNull
     private Date endDate;
 
-    @NotEmpty
+    @NotNull
     private String title;
 
     private int likey;
 
     private int reviews;
 
-    @NotEmpty
+    @NotNull
     private Time weekdayOpen;
 
-    @NotEmpty
+    @NotNull
     private Time weekdayClose;
 
-    @NotEmpty
+    @NotNull
     private Time weekendOpen;
 
-    @NotEmpty
+    @NotNull
     private Time weekendClose;
 
-    @NotEmpty
+    @NotNull
     private String location;
 
-    @NotEmpty
+    @NotNull
     private String site;
 
     private Date holiday;
 
-    @NotEmpty
+    @NotNull
     private String content;
 
-    @NotEmpty
+    @NotNull
     private String photo1;
 
     private String photo2;
 
     private String photo3;
 
-    @NotEmpty
+    @NotNull
     private int price;
 
     //생성 메서드
-    @Builder
-    public void createDisplay(EventDto eventDto) {
-        this.startDate = eventDto.getStartDate();
-        this.endDate = eventDto.getEndDate();
-        this.title = eventDto.getTitle();
-        this.likey = eventDto.getLikey();
-        this.reviews = eventDto.getReviews();
-        this.weekdayOpen = eventDto.getWeekdayOpen();
-        this.weekdayClose = eventDto.getWeekdayClose();
-        this.weekendOpen = eventDto.getWeekendOpen();
-        this.weekendClose = eventDto.getWeekendClose();
-        this.location = eventDto.getLocation();
-        this.site = eventDto.getSite();
-        this.holiday = eventDto.getHoliday();
-        this.content = eventDto.getContent();
-        this.photo1 = eventDto.getPhoto1();
-        this.photo2 = eventDto.getPhoto2();
-        this.photo3 = eventDto.getPhoto3();
-        this.price = eventDto.getPrice();
+    public static Display createDisplay(EventDto eventDto) {
+        Display display = new Display();
+        display.startDate = eventDto.getStartDate();
+        display.endDate = eventDto.getEndDate();
+        display.title = eventDto.getTitle();
+        display.likey = eventDto.getLikey();
+        display.reviews = eventDto.getReviews();
+        display.weekdayOpen = eventDto.getWeekdayOpen();
+        display.weekdayClose = eventDto.getWeekdayClose();
+        display.weekendOpen = eventDto.getWeekendOpen();
+        display.weekendClose = eventDto.getWeekendClose();
+        display.location = eventDto.getLocation();
+        display.site = eventDto.getSite();
+        display.holiday = eventDto.getHoliday();
+        display.content = eventDto.getContent();
+        display.photo1 = eventDto.getPhoto1();
+        display.photo2 = eventDto.getPhoto2();
+        display.photo3 = eventDto.getPhoto3();
+        display.price = eventDto.getPrice();
+
+        return display;
     }
 }

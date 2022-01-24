@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import hyangyu.server.domain.User;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Set;
@@ -29,6 +30,15 @@ public class UserDto {
 	@Size(min = 3, max = 10)
 	private String username;
 
+	
+	private String sub;
+	
+	@NotNull
+	private String token;
+	
+	@Size(max = 50)
+	private String image;
+	
 	private Set<AuthorityDto> authorityDtoSet;
 
 public static UserDto from(User user) {
@@ -37,6 +47,9 @@ public static UserDto from(User user) {
 	return UserDto.builder()
               .username(user.getUsername())
               .email(user.getEmail())
+              .sub(user.getSub())
+              .token(user.getToken())
+              .image(user.getImage())
               .authorityDtoSet(user.getAuthorities().stream()
                       .map(authority -> AuthorityDto.builder().authorityName(authority.getAuthorityName()).build())
                       .collect(Collectors.toSet()))
