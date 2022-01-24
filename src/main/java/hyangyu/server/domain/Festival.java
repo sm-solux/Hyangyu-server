@@ -69,25 +69,27 @@ public class Festival {
     private int price;
 
     //생성 메서드
-    @Builder
-    public void createFestival(EventDto eventDto) {
-        this.startDate = eventDto.getStartDate();
-        this.endDate = eventDto.getEndDate();
-        this.title = eventDto.getTitle();
-        this.likey = eventDto.getLikey();
-        this.reviews = eventDto.getReviews();
-        this.weekdayOpen = eventDto.getWeekdayOpen();
-        this.weekdayClose = eventDto.getWeekdayClose();
-        this.weekendOpen = eventDto.getWeekendOpen();
-        this.weekendClose = eventDto.getWeekendClose();
-        this.location = eventDto.getLocation();
-        this.site = eventDto.getSite();
-        this.holiday = eventDto.getHoliday();
-        this.content = eventDto.getContent();
-        this.photo1 = eventDto.getPhoto1();
-        this.photo2 = eventDto.getPhoto2();
-        this.photo3 = eventDto.getPhoto3();
-        this.price = eventDto.getPrice();
+    public static Festival createFestival(EventDto eventDto) {
+        Festival festival = new Festival();
+        festival.startDate = eventDto.getStartDate();
+        festival.endDate = eventDto.getEndDate();
+        festival.title = eventDto.getTitle();
+        festival.likey = eventDto.getLikey();
+        festival.reviews = eventDto.getReviews();
+        festival.weekdayOpen = eventDto.getWeekdayOpen();
+        festival.weekdayClose = eventDto.getWeekdayClose();
+        festival.weekendOpen = eventDto.getWeekendOpen();
+        festival.weekendClose = eventDto.getWeekendClose();
+        festival.location = eventDto.getLocation();
+        festival.site = eventDto.getSite();
+        festival.holiday = eventDto.getHoliday();
+        festival.content = eventDto.getContent();
+        festival.photo1 = eventDto.getPhoto1();
+        festival.photo2 = eventDto.getPhoto2();
+        festival.photo3 = eventDto.getPhoto3();
+        festival.price = eventDto.getPrice();
+
+        return festival;
     }
 
 }

@@ -26,7 +26,9 @@ public class FavoriteFestival {
     private Festival festival;
 
     //생성 메서드
-    public void saveFestival(User user, Festival festival) {
+    public FavoriteFestival(User user, Festival festival) {
+        FavoriteFestivalId favoriteFestivalId = new FavoriteFestivalId(user.getUserId(), festival.getFestivalId());
+        this.favoriteFestivalId = favoriteFestivalId;
         this.user = user;
         this.festival = festival;
     }

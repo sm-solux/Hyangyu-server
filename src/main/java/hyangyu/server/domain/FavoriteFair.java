@@ -1,12 +1,14 @@
 package hyangyu.server.domain;
 
-import lombok.Builder;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class FavoriteFair {
 
     @EmbeddedId
@@ -22,8 +24,10 @@ public class FavoriteFair {
     @JoinColumn(name = "fair_id")
     private Fair fair;
 
-    //생성 메서드
-    public void saveFair(User user, Fair fair) {
+    //생성자
+    public FavoriteFair(User user, Fair fair) {
+        FavoriteFairId favoriteFairId = new FavoriteFairId(user.getUserId(), fair.getFairId());
+        this.favoriteFairId = favoriteFairId;
         this.user = user;
         this.fair = fair;
     }
