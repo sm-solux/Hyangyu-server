@@ -2,7 +2,6 @@ package hyangyu.server.repository;
 
 import hyangyu.server.domain.Display;
 import hyangyu.server.domain.FavoriteDisplay;
-import hyangyu.server.domain.FavoriteDisplayId;
 import hyangyu.server.domain.User;
 import hyangyu.server.dto.EventDto;
 import org.junit.jupiter.api.Assertions;
@@ -18,7 +17,7 @@ import java.sql.Time;
 
 @SpringBootTest
 @Transactional
-public class FavoriteDisplayTest {
+public class FavoriteDisplayRepositoryTest {
 
     @Autowired
     FavoriteDisplayRepository favoriteDisplayRepository;
@@ -39,16 +38,18 @@ public class FavoriteDisplayTest {
         //전시 생성
         EventDto eventDto = new EventDto(Date.valueOf("2021-01-16"), Date.valueOf("2021-01-26"), "테스트 전시", 3, 0, Time.valueOf("09:00:00"), Time.valueOf("18:00:00"), Time.valueOf("09:00:00"), Time.valueOf("18:00:00"), "서울", "세종미술관", Date.valueOf("2021-01-26"), "세부내용", "", "", "", 0);
         Display display = Display.createDisplay(eventDto);
+
         displayRepository.saveDisplay(display);
 
         //내가 저장한 전시회 생성
-        FavoriteDisplay favoriteDisplay = new FavoriteDisplay(user.getUserId(), display.getDisplayId(), user, display);
+        FavoriteDisplay favoriteDisplay = new FavoriteDisplay(user, display);
 
         //when
         favoriteDisplayRepository.saveFavoriteDisplay(favoriteDisplay);
 
         //then
         Assertions.assertEquals(display, displayRepository.findOne(display.getDisplayId()));
+        Assertions.assertEquals(display, favoriteDisplayRepository.findOne(favoriteDisplay.getFavoriteDisplayId()).getDisplay());
     }
 
 
