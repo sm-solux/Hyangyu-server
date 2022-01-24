@@ -48,7 +48,7 @@ public class FavoriteDisplayRepositoryTest {
         favoriteDisplayRepository.saveFavoriteDisplay(favoriteDisplay);
 
         //then
-        Assertions.assertEquals(display, displayRepository.findOne(display.getDisplayId()));
+        Assertions.assertEquals(display, displayRepository.findOne(display.getDisplayId()).get());
         Assertions.assertEquals(display, favoriteDisplayRepository.findOne(favoriteDisplay.getFavoriteDisplayId()).getDisplay());
     }
 
