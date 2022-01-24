@@ -2,16 +2,13 @@ package hyangyu.server.domain;
 
 import hyangyu.server.dto.EventDto;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.sql.Time;
 
@@ -24,50 +21,50 @@ public class Display {
     @GeneratedValue
     private Long displayId;
 
-    @NotEmpty
+    @NotNull
     private Date startDate;
 
-    @NotEmpty
+    @NotNull
     private Date endDate;
 
-    @NotEmpty
+    @NotNull
     private String title;
 
     private int likey;
 
     private int reviews;
 
-    @NotEmpty
+    @NotNull
     private Time weekdayOpen;
 
-    @NotEmpty
+    @NotNull
     private Time weekdayClose;
 
-    @NotEmpty
+    @NotNull
     private Time weekendOpen;
 
-    @NotEmpty
+    @NotNull
     private Time weekendClose;
 
-    @NotEmpty
+    @NotNull
     private String location;
 
-    @NotEmpty
+    @NotNull
     private String site;
 
     private Date holiday;
 
-    @NotEmpty
+    @NotNull
     private String content;
 
-    @NotEmpty
+    @NotNull
     private String photo1;
 
     private String photo2;
 
     private String photo3;
 
-    @NotEmpty
+    @NotNull
     private int price;
 
     //생성 메서드

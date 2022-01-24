@@ -24,11 +24,11 @@ public class FavoriteDisplay {
     @JoinColumn(name = "display_id")
     private Display display;
 
-    //생성 메서드
-    public static FavoriteDisplay saveDisplayId(FavoriteDisplayId favoriteDisplayId) {
-        FavoriteDisplay favoriteDisplay = new FavoriteDisplay();
-        favoriteDisplay.favoriteDisplayId = favoriteDisplayId;
-        return favoriteDisplay;
+    //생성자
+    public FavoriteDisplay(User user, Display display) {
+        FavoriteDisplayId favoriteDisplayId = new FavoriteDisplayId(user.getUserId(), display.getDisplayId());
+        this.favoriteDisplayId = favoriteDisplayId;
+        this.user = user;
+        this.display = display;
     }
-
 }
