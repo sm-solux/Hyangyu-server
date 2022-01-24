@@ -2,7 +2,6 @@ package hyangyu.server.repository;
 
 import hyangyu.server.domain.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -17,16 +16,8 @@ public class FavoriteDisplayRepository {
         em.persist(favoriteDisplay);
     }
 
-    /*
-    public saveFair(User user, Fair fair) {
-
+    public FavoriteDisplay findOne(FavoriteDisplayId favoriteDisplayId) {
+        return em.find(FavoriteDisplay.class, favoriteDisplayId);
     }
-
-    public saveFestival(User user, Festival festival) {
-
-    }
-
-     */
-
 
 }
