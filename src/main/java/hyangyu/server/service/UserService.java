@@ -54,4 +54,10 @@ public class UserService {
     public UserDto getMyUserWithAuthorities() {
         return UserDto.from(SecurityUtil.getCurrentEmail().flatMap(userRepository::findByEmail).orElse(null));
     }
+
+    @Transactional(readOnly = true)
+    public Optional<User> findUser(Long userId) throws Exception {
+        Optional<User> user = userRepository.findByUserId(userId);
+        return user;
+    }
 }
