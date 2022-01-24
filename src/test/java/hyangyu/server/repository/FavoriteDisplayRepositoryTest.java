@@ -31,23 +31,18 @@ public class FavoriteDisplayTest {
     void saveDisplay() {
 
         //given
-        User user = User.createUser("hyangyu@naver.com", "abcd1234", "향유");
+
+        //사용자 생성
+        User user = User.createUser("hyangyu@naver.com", "abcd1234", "향유", null, "token", null);
         em.persist(user);
 
+        //전시 생성
         EventDto eventDto = new EventDto(Date.valueOf("2021-01-16"), Date.valueOf("2021-01-26"), "테스트 전시", 3, 0, Time.valueOf("09:00:00"), Time.valueOf("18:00:00"), Time.valueOf("09:00:00"), Time.valueOf("18:00:00"), "서울", "세종미술관", Date.valueOf("2021-01-26"), "세부내용", "", "", "", 0);
-
         Display display = Display.createDisplay(eventDto);
         displayRepository.saveDisplay(display);
 
-        System.out.println("user = " + user.getUserId());
-        System.out.println("display = " + display.getDisplayId());
-
-        FavoriteDisplayId favoriteDisplayId = FavoriteDisplayId.createFavoriteDisplayId(user.getUserId(), display.getDisplayId());
-        FavoriteDisplay favoriteDisplay = FavoriteDisplay.saveDisplayId(favoriteDisplayId);
-
-
-        System.out.println(favoriteDisplay.getUser().getUsername());
-        //System.out.println(favoriteDisplay.getFavoriteDisplayId());
+        //내가 저장한 전시회 생성
+        FavoriteDisplay favoriteDisplay = new FavoriteDisplay(user.getUserId(), display.getDisplayId(), user, display);
 
         //when
         favoriteDisplayRepository.saveFavoriteDisplay(favoriteDisplay);
