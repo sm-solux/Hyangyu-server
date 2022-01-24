@@ -44,6 +44,11 @@ public class ReviewApi {
         }
 
         //리뷰 저장
+        int length = requestReviewDto.getContent().length();
+        if (length > 300) {
+            return new ResponseEntity(new ErrorDto(400, "리뷰 길이가 300자를 초과합니다."), HttpStatus.BAD_REQUEST);
+        }
+
         int count = displayReviewService.saveDisplayReview(userId, displayId, requestReviewDto);
         if (count == 0) {
             SaveReviewResponseDto saveReviewResponseDto = new SaveReviewResponseDto(200, "리뷰 작성이 완료되었습니다.");
