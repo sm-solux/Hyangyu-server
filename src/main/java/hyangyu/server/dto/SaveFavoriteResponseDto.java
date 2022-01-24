@@ -1,9 +1,12 @@
 package hyangyu.server.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
-public class saveFavoriteResponseDto {
+@AllArgsConstructor
+public class SaveFavoriteResponseDto {
     int status;
     String message;
 }
