@@ -1,9 +1,9 @@
 package hyangyu.server.service;
 
 import hyangyu.server.domain.*;
-import hyangyu.server.repository.FairRepository;
-import hyangyu.server.repository.FavoriteFairRepository;
-import hyangyu.server.repository.UserRepository;
+import hyangyu.server.saveFavoriteEvent.FairRepository;
+import hyangyu.server.saveFavoriteEvent.FavoriteFairRepository;
+import hyangyu.server.saveFavoriteEvent.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,4 +1,4 @@
-package hyangyu.server.repository;
+package hyangyu.server.saveFavoriteEvent;
 
 import hyangyu.server.domain.Fair;
 import lombok.RequiredArgsConstructor;

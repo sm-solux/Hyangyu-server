@@ -3,9 +3,8 @@ package hyangyu.server.service;
 
 import hyangyu.server.domain.Festival;
 import hyangyu.server.domain.FavoriteFestival;
-import hyangyu.server.domain.Festival;
 import hyangyu.server.domain.User;
-import hyangyu.server.repository.*;
+import hyangyu.server.saveFavoriteEvent.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

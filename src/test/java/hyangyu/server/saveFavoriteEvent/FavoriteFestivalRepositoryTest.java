@@ -1,6 +1,8 @@
-package hyangyu.server.repository;
+package hyangyu.server.saveFavoriteEvent;
 
-import hyangyu.server.domain.*;
+import hyangyu.server.domain.Festival;
+import hyangyu.server.domain.FavoriteFestival;
+import hyangyu.server.domain.User;
 import hyangyu.server.dto.EventDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -14,16 +16,16 @@ import java.sql.Time;
 
 @SpringBootTest
 @Transactional
-public class FavoriteFairRepositoryTest {
+public class FavoriteFestivalRepositoryTest {
     @Autowired
-    FavoriteFairRepository favoriteFairRepository;
+    FavoriteFestivalRepository favoriteFestivalRepository;
     @Autowired
-    FairRepository fairRepository;
+    FestivalRepository festivalRepository;
     @Autowired
     EntityManager em;
 
     @Test
-    void saveFair() {
+    void saveFestival() {
 
         //given
 
@@ -33,17 +35,18 @@ public class FavoriteFairRepositoryTest {
 
         //박람회 생성
         EventDto eventDto = new EventDto(Date.valueOf("2021-01-24"), Date.valueOf("2021-01-28"), "테스트 전시2", 5, 0, Time.valueOf("09:00:00"), Time.valueOf("18:00:00"), Time.valueOf("09:00:00"), Time.valueOf("18:00:00"), "서울", "향유미술관", Date.valueOf("2021-01-26"), "세부내용", "", "", "", 0);
-        Fair fair = Fair.createFair(eventDto);
-        fairRepository.saveFair(fair);
+        Festival festival = Festival.createFestival(eventDto);
 
-        //내가 저장한 박람회 생성
-        FavoriteFair favoriteFair = new FavoriteFair(user, fair);
+        festivalRepository.saveFestival(festival);
+
+        //내가 저장한 페스티벌 생성
+        FavoriteFestival favoriteFestival = new FavoriteFestival(user, festival);
 
         //when
-        favoriteFairRepository.saveFavoriteFair(favoriteFair);
+        favoriteFestivalRepository.saveFavoriteFestival(favoriteFestival);
 
         //then
-        Assertions.assertEquals(fair, fairRepository.findOne(fair.getFairId()).get());
-        Assertions.assertEquals(fair, favoriteFairRepository.findOne(favoriteFair.getFavoriteFairId()).getFair());
+        Assertions.assertEquals(festival, festivalRepository.findOne(festival.getFestivalId()).get());
+        Assertions.assertEquals(festival, favoriteFestivalRepository.findOne(favoriteFestival.getFavoriteFestivalId()).getFestival());
     }
 }

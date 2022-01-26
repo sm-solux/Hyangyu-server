@@ -1,12 +1,8 @@
 package hyangyu.server.service;
 
 import hyangyu.server.domain.Display;
-import hyangyu.server.dto.ErrorDto;
-import hyangyu.server.repository.DisplayRepository;
+import hyangyu.server.saveFavoriteEvent.DisplayRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

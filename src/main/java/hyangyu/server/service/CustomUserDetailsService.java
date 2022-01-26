@@ -1,7 +1,7 @@
 package hyangyu.server.service;
 
 import hyangyu.server.domain.User;
-import hyangyu.server.repository.UserRepository;
+import hyangyu.server.saveFavoriteEvent.UserRepository;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

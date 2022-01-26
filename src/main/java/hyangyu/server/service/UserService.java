@@ -6,7 +6,7 @@ import hyangyu.server.dto.UserDto;
 import hyangyu.server.domain.Authority;
 import hyangyu.server.domain.User;
 import hyangyu.server.jwt.DuplicateMemberException;
-import hyangyu.server.repository.UserRepository;
+import hyangyu.server.saveFavoriteEvent.UserRepository;
 import hyangyu.server.jwt.SecurityUtil;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

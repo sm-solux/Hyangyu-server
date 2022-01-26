@@ -1,4 +1,4 @@
-package hyangyu.server.repository;
+package hyangyu.server.saveFavoriteEvent;
 
 import hyangyu.server.domain.FavoriteFestival;
 import hyangyu.server.domain.FavoriteFestivalId;
