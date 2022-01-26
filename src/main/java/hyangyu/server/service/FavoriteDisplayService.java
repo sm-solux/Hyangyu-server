@@ -2,7 +2,6 @@ package hyangyu.server.service;
 
 import hyangyu.server.domain.Display;
 import hyangyu.server.domain.FavoriteDisplay;
-import hyangyu.server.domain.FavoriteDisplayId;
 import hyangyu.server.domain.User;
 import hyangyu.server.repository.DisplayRepository;
 import hyangyu.server.repository.FavoriteDisplayRepository;
@@ -19,11 +18,11 @@ import java.util.Optional;
 public class FavoriteDisplayService {
 
     private final FavoriteDisplayRepository favoriteDisplayRepository;
-    private final UserRepository userRepository;
     private final DisplayRepository displayRepository;
+    private final UserRepository userRepository;
 
     @Transactional(readOnly = false)
-    public Optional<FavoriteDisplay> saveFavoriteDisplay(Long userId, Long displayId) throws Exception {
+    public Optional<FavoriteDisplay> saveFavoriteDisplay(Long userId, Long displayId) {
         Optional<User> user = userRepository.findByUserId(userId);
         Optional<Display> display = displayRepository.findOne(displayId);
         FavoriteDisplay favoriteDisplay = new FavoriteDisplay(user.get(), display.get());
