@@ -19,70 +19,73 @@ import hyangyu.server.jwt.TokenProvider;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	  private final TokenProvider tokenProvider;
-	  private final CorsFilter corsFilter;
-	  private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-	  private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
+    private final TokenProvider tokenProvider;
+    private final CorsFilter corsFilter;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
-	  public SecurityConfig(
-	            TokenProvider tokenProvider,
-	            CorsFilter corsFilter,
-	            JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
-	            JwtAccessDeniedHandler jwtAccessDeniedHandler
-	    ) {
-	        this.tokenProvider = tokenProvider;
-	        this.corsFilter = corsFilter;
-	        this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
-	        this.jwtAccessDeniedHandler = jwtAccessDeniedHandler;
-	    }
-	  
-	    @Bean
-	    public PasswordEncoder passwordEncoder() {
-	        return new BCryptPasswordEncoder();
-	    }
-/*	@Override
-	public void configure(WebSecurity web) {
-		web
-					.ignoring()
-					.antMatchers(h2console안써서안해도되나?);
-	}*/
-	    @Override
-	    protected void configure(HttpSecurity httpSecurity) throws Exception {
-	        httpSecurity
-	                // token을 사용하는 방식이기 때문에 csrf를 disable합니다.
-	                .csrf().disable()
+    public SecurityConfig(
+            TokenProvider tokenProvider,
+            CorsFilter corsFilter,
+            JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
+            JwtAccessDeniedHandler jwtAccessDeniedHandler
+    ) {
+        this.tokenProvider = tokenProvider;
+        this.corsFilter = corsFilter;
+        this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
+        this.jwtAccessDeniedHandler = jwtAccessDeniedHandler;
+    }
 
-	                .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
-	                .exceptionHandling()
-	                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-	                .accessDeniedHandler(jwtAccessDeniedHandler)
+    /*	@Override
+        public void configure(WebSecurity web) {
+            web
+                        .ignoring()
+                        .antMatchers(h2console안써서안해도되나?);
+        }*/
+    @Override
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity
+                // token을 사용하는 방식이기 때문에 csrf를 disable합니다.
+                .csrf().disable()
 
-	                .and()
-	                .headers()
-	                .frameOptions()
-	                .sameOrigin()
-	                
-	                // 세션을 사용하지 않기 때문에 STATELESS로 설정
-	                .and()
-	                .sessionManagement()
-	                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
 
-	                .and()
-	                .authorizeRequests()
-	                .antMatchers("/user/UserApi").permitAll()
-	                .antMatchers("/api/AuthController/authenticate").permitAll()
-	                .antMatchers("/api/UserApi/signup").permitAll()
-					        .antMatchers("/api/display/{displayId}").permitAll()
-                  .antMatchers("/api/fair/{fairId}").permitAll()
-                  .antMatchers("/api/festival/{festivalId}").permitAll()
-                  .antMatchers("/api/review/display/{displayId}").permitAll()
-	                .anyRequest().authenticated()
+                .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .accessDeniedHandler(jwtAccessDeniedHandler)
 
-	                .and()
-	                .apply(new JwtSecurityConfig(tokenProvider));
-	    }
-	
+                .and()
+                .headers()
+                .frameOptions()
+                .sameOrigin()
+
+                // 세션을 사용하지 않기 때문에 STATELESS로 설정
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+
+                .and()
+                .authorizeRequests()
+                .antMatchers("/user/UserApi").permitAll()
+                .antMatchers("/api/AuthController/authenticate").permitAll()
+                .antMatchers("/api/UserApi/signup").permitAll()
+                .antMatchers("/api/display/{displayId}").permitAll()
+                .antMatchers("/api/fair/{fairId}").permitAll()
+                .antMatchers("/api/festival/{festivalId}").permitAll()
+                .antMatchers("/api/review/display/{displayId}").permitAll()
+                .antMatchers("/api/review/fair/{fairId}").permitAll()
+                .antMatchers("/api/review/festival/{festivalId}").permitAll()
+                .anyRequest().authenticated()
+
+                .and()
+                .apply(new JwtSecurityConfig(tokenProvider));
+    }
+
 }
