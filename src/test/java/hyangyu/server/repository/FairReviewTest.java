@@ -41,7 +41,7 @@ class FairReviewTest {
         //when
         FairReview fairReview = FairReview.createFairReview(user, fair, user.getUsername(), LocalDateTime.now(), "내용", 5);
         FairReview savedFairReview = fairReviewRepository.save(fairReview);
-        int count = fairReviewRepository.findReview(fair.getFairId(), user.getUserId());
+        int count = fairReviewRepository.getCount(fair.getFairId(), user.getUserId());
 
         //then
         assertEquals(fairReview, savedFairReview);
