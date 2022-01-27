@@ -65,7 +65,7 @@ public class FavoriteApi {
         Long userId = 1L;
         HttpHeaders httpHeaders = new HttpHeaders();
 
-        EventDto eventDto = new EventDto(Date.valueOf("2021-01-24"), Date.valueOf("2021-01-28"), "테스트 박람회", 5, 0, Time.valueOf("09:00:00"), Time.valueOf("18:00:00"), Time.valueOf("09:00:00"), Time.valueOf("18:00:00"), "서울", "향유박람회", Date.valueOf("2021-01-26"), "세부내용", "", "", "", 0);
+        EventDto eventDto = new EventDto(Date.valueOf("2021-01-24"), Date.valueOf("2021-01-28"), "테스트 박람회", 5, 0, Time.valueOf("09:00:00"), Time.valueOf("18:00:00"), Time.valueOf("09:00:00"), Time.valueOf("18:00:00"), "서울", "향유박람회", "매주 월요일", "세부내용", "", "", "", 0);
         Fair fair1 = Fair.createFair(eventDto);
         fairService.saveFair(fair1);
 
@@ -96,7 +96,7 @@ public class FavoriteApi {
         Long userId = 1L;
         HttpHeaders httpHeaders = new HttpHeaders();
 
-        EventDto eventDto = new EventDto(Date.valueOf("2021-01-24"), Date.valueOf("2021-01-28"), "테스트 페스티벌", 5, 0, Time.valueOf("09:00:00"), Time.valueOf("18:00:00"), Time.valueOf("09:00:00"), Time.valueOf("18:00:00"), "서울", "향유페스티벌", Date.valueOf("2021-01-26"), "세부내용", "", "", "", 0);
+        EventDto eventDto = new EventDto(Date.valueOf("2021-01-24"), Date.valueOf("2021-01-28"), "테스트 페스티벌", 5, 0, Time.valueOf("09:00:00"), Time.valueOf("18:00:00"), Time.valueOf("09:00:00"), Time.valueOf("18:00:00"), "서울", "향유페스티벌", "매주 일요일", "세부내용", "", "", "", 0);
         Festival f = Festival.createFestival(eventDto);
         festivalService.saveFestival(f);
 
