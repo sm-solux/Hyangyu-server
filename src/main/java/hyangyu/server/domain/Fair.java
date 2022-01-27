@@ -71,11 +71,9 @@ public class Fair {
     //생성 메서드
     public static Fair createFair(EventDto eventDto) {
         Fair fair = new Fair();
+        fair.title = eventDto.getTitle();
         fair.startDate = eventDto.getStartDate();
         fair.endDate = eventDto.getEndDate();
-        fair.title = eventDto.getTitle();
-        fair.likey = eventDto.getLikey();
-        fair.reviews = eventDto.getReviews();
         fair.weekdayOpen = eventDto.getWeekdayOpen();
         fair.weekdayClose = eventDto.getWeekdayClose();
         fair.weekendOpen = eventDto.getWeekendOpen();

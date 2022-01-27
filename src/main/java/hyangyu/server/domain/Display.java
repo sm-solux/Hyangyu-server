@@ -70,11 +70,9 @@ public class Display {
     //생성 메서드
     public static Display createDisplay(EventDto eventDto) {
         Display display = new Display();
+        display.title = eventDto.getTitle();
         display.startDate = eventDto.getStartDate();
         display.endDate = eventDto.getEndDate();
-        display.title = eventDto.getTitle();
-        display.likey = eventDto.getLikey();
-        display.reviews = eventDto.getReviews();
         display.weekdayOpen = eventDto.getWeekdayOpen();
         display.weekdayClose = eventDto.getWeekdayClose();
         display.weekendOpen = eventDto.getWeekendOpen();

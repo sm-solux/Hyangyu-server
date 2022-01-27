@@ -71,11 +71,9 @@ public class Festival {
     //생성 메서드
     public static Festival createFestival(EventDto eventDto) {
         Festival festival = new Festival();
+        festival.title = eventDto.getTitle();
         festival.startDate = eventDto.getStartDate();
         festival.endDate = eventDto.getEndDate();
-        festival.title = eventDto.getTitle();
-        festival.likey = eventDto.getLikey();
-        festival.reviews = eventDto.getReviews();
         festival.weekdayOpen = eventDto.getWeekdayOpen();
         festival.weekdayClose = eventDto.getWeekdayClose();
         festival.weekendOpen = eventDto.getWeekendOpen();
