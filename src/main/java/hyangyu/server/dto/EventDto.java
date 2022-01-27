@@ -4,15 +4,14 @@ import lombok.Data;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 public class EventDto {
+    private String title;
     private Date startDate;
     private Date endDate;
-    private String title;
-    private int likey;
-    private int reviews;
     private Time weekdayOpen;
     private Time weekdayClose;
     private Time weekendOpen;
@@ -25,6 +24,9 @@ public class EventDto {
     private String photo2;
     private String photo3;
     private int price;
+    private boolean isSaved;
+    private List<ReviewDto> reviews;
+
 }
 
 
