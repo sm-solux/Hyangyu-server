@@ -53,7 +53,7 @@ public class UserApi {
     }
     
     @PostMapping("/user/modifyPassword")
-    public ResponseEntity<String> modifyUsername(@PathVariable String email, String password){
+    public ResponseEntity<String> modifyPassword(@PathVariable String email, String password){
     	return ResponseEntity.ok(userService.modifyPassword(email, password));
     }
 }
