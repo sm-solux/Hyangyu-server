@@ -40,7 +40,7 @@ public class UserApi {
     }
 
     @GetMapping("/user/{email}")
-    @PreAuthorize("hasAnyRole('USER','ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<UserDto> getUserInfo(@PathVariable String email) {
         return ResponseEntity.ok(userService.getUserWithAuthorities(email));
     }
