@@ -19,7 +19,7 @@ public class EventDto {
     private Time weekendClose;
     private String location;
     private String site;
-    private Date holiday;
+    private String holiday;
     private String content;
     private String photo1;
     private String photo2;

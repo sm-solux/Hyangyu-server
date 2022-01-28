@@ -53,7 +53,7 @@ public class Fair {
     @NotNull
     private String site;
 
-    private Date holiday;
+    private String holiday;
 
     @NotNull
     private String content;

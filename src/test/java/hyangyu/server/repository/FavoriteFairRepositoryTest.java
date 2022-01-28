@@ -32,7 +32,7 @@ public class FavoriteFairRepositoryTest {
         em.persist(user);
 
         //박람회 생성
-        EventDto eventDto = new EventDto(Date.valueOf("2021-01-24"), Date.valueOf("2021-01-28"), "테스트 전시2", 5, 0, Time.valueOf("09:00:00"), Time.valueOf("18:00:00"), Time.valueOf("09:00:00"), Time.valueOf("18:00:00"), "서울", "향유미술관", Date.valueOf("2021-01-26"), "세부내용", "", "", "", 0);
+        EventDto eventDto = new EventDto(Date.valueOf("2021-01-24"), Date.valueOf("2021-01-28"), "테스트 전시2", 5, 0, Time.valueOf("09:00:00"), Time.valueOf("18:00:00"), Time.valueOf("09:00:00"), Time.valueOf("18:00:00"), "서울", "향유미술관", "매주 월요일", "세부내용", "", "", "", 0);
         Fair fair = Fair.createFair(eventDto);
         fairRepository.saveFair(fair);
 

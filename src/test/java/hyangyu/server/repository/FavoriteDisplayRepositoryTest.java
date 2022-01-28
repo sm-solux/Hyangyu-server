@@ -36,7 +36,7 @@ public class FavoriteDisplayRepositoryTest {
         em.persist(user);
 
         //전시 생성
-        EventDto eventDto = new EventDto(Date.valueOf("2021-01-16"), Date.valueOf("2021-01-26"), "테스트 전시", 3, 0, Time.valueOf("09:00:00"), Time.valueOf("18:00:00"), Time.valueOf("09:00:00"), Time.valueOf("18:00:00"), "서울", "세종미술관", Date.valueOf("2021-01-26"), "세부내용", "", "", "", 0);
+        EventDto eventDto = new EventDto(Date.valueOf("2021-01-16"), Date.valueOf("2021-01-26"), "테스트 전시", 3, 0, Time.valueOf("09:00:00"), Time.valueOf("18:00:00"), Time.valueOf("09:00:00"), Time.valueOf("18:00:00"), "서울", "세종미술관", "매주 수요일", "세부내용", "", "", "", 0);
         Display display = Display.createDisplay(eventDto);
 
         displayRepository.saveDisplay(display);
