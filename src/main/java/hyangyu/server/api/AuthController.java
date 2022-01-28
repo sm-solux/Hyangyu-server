@@ -1,5 +1,6 @@
 package hyangyu.server.api;
 
+
 import hyangyu.server.dto.LoginDto;
 import hyangyu.server.dto.TokenDto;
 import hyangyu.server.jwt.JwtFilter;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Base64;
 
 import javax.validation.Valid;
 
@@ -45,4 +48,6 @@ public class AuthController {
 
         return new ResponseEntity<>(new TokenDto(jwt), httpHeaders, HttpStatus.OK);
     }
+    
+    
 }

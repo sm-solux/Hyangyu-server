@@ -44,6 +44,22 @@ public class UserService {
 
         return UserDto.from(userRepository.save(user));
     }
+    
+    @Transactional
+    public String modifyUsername(UserDto userDto, String username) {
+    	User userEntity = userRepository.findByEmail(userDto.getEmail()).orElseThrow(() ->new IllegalArgumentException("해당 회원이 없습니다."));
+    	userEntity.setUsername(username);
+    	
+    	return username;
+    }
+    
+    @Transactional
+    public String modifyPassword(String email, String password) {
+    	User userEntity = userRepository.findByEmail(email).orElseThrow(() ->new IllegalArgumentException("해당 회원이 없습니다."));
+    	userEntity.setPassword(passwordEncoder.encode(password));
+    	
+    	return email;
+    }
 
     @Transactional(readOnly = true)
     public UserDto getUserWithAuthorities(String email) {
