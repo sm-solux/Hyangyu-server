@@ -8,4 +8,7 @@ public interface FestivalReviewRepository extends JpaRepository<FestivalReview, 
 
     @Query("select count(r) from FestivalReview r where r.festival.festivalId=?1 and r.user.userId=?2")
     public int getCount(Long festivalId, Long userId);
+
+    @Query("select r from FestivalReview r where r.festival.festivalId=?1 and r.user.userId=?2")
+    public FestivalReview getFestivalReview(Long festivalId, Long userId);
 }
