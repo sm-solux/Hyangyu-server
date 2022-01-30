@@ -34,4 +34,11 @@ public class FairReviewService {
         }
         return count;
     }
+
+    @Transactional(readOnly = false)
+    public Optional<FairReview> modifyFairReview(Long userId, Long fairId, RequestReviewDto requestReviewDto) {
+        Optional<FairReview> fairReview = Optional.ofNullable(fairReviewRepository.getFairReview(fairId, userId));
+        fairReview.ifPresent(review -> review.updateFairReview(requestReviewDto.getContent(), requestReviewDto.getScore()));
+        return fairReview;
+    }
 }

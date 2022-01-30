@@ -55,4 +55,9 @@ public class FairReview {
         fairReview.score = score;
         return fairReview;
     }
+
+    public void updateFairReview(String content, Integer score) {
+        this.content = content;
+        this.score = score;
+    }
 }

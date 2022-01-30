@@ -34,4 +34,11 @@ public class FestivalReviewService {
         }
         return count;
     }
+
+    @Transactional(readOnly = false)
+    public Optional<FestivalReview> modifyFestivalReview(Long userId, Long festivalId, RequestReviewDto requestReviewDto) {
+        Optional<FestivalReview> festivalReview = Optional.ofNullable(festivalReviewRepository.getFestivalReview(festivalId, userId));
+        festivalReview.ifPresent(review -> review.updateFestivalReview(requestReviewDto.getContent(), requestReviewDto.getScore()));
+        return festivalReview;
+    }
 }

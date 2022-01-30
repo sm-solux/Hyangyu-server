@@ -55,4 +55,9 @@ public class FestivalReview {
         festivalReview.score = score;
         return festivalReview;
     }
+
+    public void updateFestivalReview(String content, Integer score) {
+        this.content = content;
+        this.score = score;
+    }
 }
