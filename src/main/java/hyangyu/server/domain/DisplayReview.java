@@ -52,4 +52,9 @@ public class DisplayReview {
         displayReview.score = score;
         return displayReview;
     }
+
+    public void updateDisplayReview(String content, Integer score) {
+        this.content = content;
+        this.score = score;
+    }
 }
