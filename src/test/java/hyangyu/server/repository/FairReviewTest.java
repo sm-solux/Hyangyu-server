@@ -48,4 +48,29 @@ class FairReviewTest {
         assertEquals(fairReview.getReviewId(), savedFairReview.getReviewId());
         assertThat(count).isEqualTo(1);
     }
+
+    @Test
+    @DisplayName("박람회 리뷰 수정")
+    void modifyFairReview() throws Exception {
+        //given
+        User user = User.createUser("test@naver.com", "test1234", "향유", "sub", "token", "image");
+        em.persist(user);
+
+        EventDto eventDto = new EventDto(Date.valueOf("2021-01-17"), Date.valueOf("2021-01-20"), "박람회제목", 2, 0, Time.valueOf("09:00:00"), Time.valueOf("17:00:00"), Time.valueOf("09:00:00"), Time.valueOf("17:00:00"), "위치", "사이트주소", "매주 월요일", "내용", "사진1", "사진2", "사진3", 20000);
+        Fair fair = Fair.createFair(eventDto);
+        em.persist(fair);
+
+        FairReview fairReview = FairReview.createFairReview(user, fair, user.getUsername(), LocalDateTime.now(), "내용", 5);
+        FairReview savedFairReview = fairReviewRepository.save(fairReview);
+
+        //when
+        FairReview getFairReview = fairReviewRepository.getFairReview(fair.getFairId(), user.getUserId());
+        getFairReview.updateFairReview("수정된 내용", 3);
+        FairReview updatedFairReview = fairReviewRepository.getFairReview(fair.getFairId(), user.getUserId());
+
+        //then
+        assertThat(getFairReview).isEqualTo(savedFairReview);
+        assertThat(updatedFairReview.getContent()).isEqualTo("수정된 내용");
+        assertThat(updatedFairReview.getScore()).isEqualTo(3);
+    }
 }
