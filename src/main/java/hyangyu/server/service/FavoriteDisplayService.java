@@ -32,4 +32,16 @@ public class FavoriteDisplayService {
         }
         return result;
     }
+
+    @Transactional(readOnly = false)
+    public Optional<FavoriteDisplay> deleteFavoriteDisplay(Long userId, Long displayId) {
+        Optional<User> user = userRepository.findByUserId(userId);
+        Optional<Display> display = displayRepository.findOne(displayId);
+        FavoriteDisplay favoriteDisplay = new FavoriteDisplay(user.get(), display.get());
+        Optional<FavoriteDisplay> result = Optional.ofNullable(favoriteDisplayRepository.findOne(favoriteDisplay.getFavoriteDisplayId()));
+        if (result.isPresent()) {
+            favoriteDisplayRepository.deleteFavoriteDisplay(favoriteDisplay);
+        }
+        return result;
+    }
 }

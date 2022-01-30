@@ -30,4 +30,16 @@ public class FavoriteFairService {
         }
         return result;
     }
+
+    @Transactional(readOnly = false)
+    public Optional<FavoriteFair> deleteFavoriteFair(Long userId, Long fairId) {
+        Optional<User> user = userRepository.findByUserId(userId);
+        Optional<Fair> fair = fairRepository.findOne(fairId);
+        FavoriteFair favoriteFair = new FavoriteFair(user.get(), fair.get());
+        Optional<FavoriteFair> result = Optional.ofNullable(favoriteFairRepository.findOne(favoriteFair.getFavoriteFairId()));
+        if (result.isPresent()) {
+            favoriteFairRepository.deleteFavoriteFair(favoriteFair);
+        }
+        return result;
+    }
 }
