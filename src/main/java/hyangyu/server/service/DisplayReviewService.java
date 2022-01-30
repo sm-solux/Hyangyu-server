@@ -35,4 +35,11 @@ public class DisplayReviewService {
         }
         return count;
     }
+
+    @Transactional(readOnly = false)
+    public Optional<DisplayReview> modifyDisplayReview(Long userId, Long displayId, RequestReviewDto requestReviewDto) {
+        Optional<DisplayReview> displayReview = Optional.ofNullable(displayReviewRepository.getDisplayReview(displayId, userId));
+        displayReview.ifPresent(review -> review.updateDisplayReview(requestReviewDto.getContent(), requestReviewDto.getScore()));
+        return displayReview;
+    }
 }
