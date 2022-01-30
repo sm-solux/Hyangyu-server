@@ -1,5 +1,6 @@
 package hyangyu.server.repository;
 
+import hyangyu.server.domain.FavoriteDisplay;
 import hyangyu.server.domain.FavoriteFestival;
 import hyangyu.server.domain.FavoriteFestivalId;
 import lombok.RequiredArgsConstructor;
@@ -19,4 +20,6 @@ public class FavoriteFestivalRepository {
     public FavoriteFestival findOne(FavoriteFestivalId favoriteFestivalId) {
         return em.find(FavoriteFestival.class, favoriteFestivalId);
     }
+
+    public void deleteFavoriteFestival(FavoriteFestival favoriteFestival) { em.remove(em.find(FavoriteFestival.class, favoriteFestival.getFavoriteFestivalId()));}
 }

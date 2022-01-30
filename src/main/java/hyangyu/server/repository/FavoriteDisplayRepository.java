@@ -20,4 +20,6 @@ public class FavoriteDisplayRepository {
         return em.find(FavoriteDisplay.class, favoriteDisplayId);
     }
 
+    public void deleteFavoriteDisplay(FavoriteDisplay favoriteDisplay) { em.remove(em.find(FavoriteDisplay.class, favoriteDisplay.getFavoriteDisplayId()));}
+
 }
