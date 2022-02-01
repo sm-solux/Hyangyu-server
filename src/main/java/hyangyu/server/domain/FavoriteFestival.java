@@ -15,12 +15,12 @@ public class FavoriteFestival {
     @EmbeddedId
     private FavoriteFestivalId favoriteFestivalId;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("userId")
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("festivalId")
     @JoinColumn(name = "festival_id")
     private Festival festival;

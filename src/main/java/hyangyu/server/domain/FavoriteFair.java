@@ -14,12 +14,12 @@ public class FavoriteFair {
     @EmbeddedId
     private FavoriteFairId favoriteFairId;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("userId")
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("fairId")
     @JoinColumn(name = "fair_id")
     private Fair fair;
