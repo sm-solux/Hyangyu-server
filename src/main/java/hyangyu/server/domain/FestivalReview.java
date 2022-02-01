@@ -45,12 +45,18 @@ public class FestivalReview {
     private Integer score;
 
     // 생성 메서드
-    public void saveFestivalReview(Long reviewId, User user, Festival festival, String nickname, LocalDateTime createTime, String content, Integer score) {
-        this.reviewId = reviewId;
-        this.user = user;
-        this.festival = festival;
-        this.nickname = nickname;
-        this.createTime = createTime;
+    public static FestivalReview createFestivalReview(User user, Festival festival, String nickname, LocalDateTime createTime, String content, Integer score) {
+        FestivalReview festivalReview = new FestivalReview();
+        festivalReview.user = user;
+        festivalReview.festival = festival;
+        festivalReview.nickname = nickname;
+        festivalReview.createTime = createTime;
+        festivalReview.content = content;
+        festivalReview.score = score;
+        return festivalReview;
+    }
+
+    public void updateFestivalReview(String content, Integer score) {
         this.content = content;
         this.score = score;
     }

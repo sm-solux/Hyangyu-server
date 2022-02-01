@@ -45,12 +45,18 @@ public class FairReview {
     private Integer score;
 
     // 생성 메서드
-    public void saveFairReview(Long reviewId, User user, Fair fair, String nickname, LocalDateTime createTime, String content, Integer score) {
-        this.reviewId = reviewId;
-        this.user = user;
-        this.fair = fair;
-        this.nickname = nickname;
-        this.createTime = createTime;
+    public static FairReview createFairReview(User user, Fair fair, String nickname, LocalDateTime createTime, String content, Integer score) {
+        FairReview fairReview = new FairReview();
+        fairReview.user = user;
+        fairReview.fair = fair;
+        fairReview.nickname = nickname;
+        fairReview.createTime = createTime;
+        fairReview.content = content;
+        fairReview.score = score;
+        return fairReview;
+    }
+
+    public void updateFairReview(String content, Integer score) {
         this.content = content;
         this.score = score;
     }

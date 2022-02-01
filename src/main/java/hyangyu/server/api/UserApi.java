@@ -44,4 +44,16 @@ public class UserApi {
     public ResponseEntity<UserDto> getUserInfo(@PathVariable String email) {
         return ResponseEntity.ok(userService.getUserWithAuthorities(email));
     }
+    
+    @PostMapping("/user/modifyUsername")
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
+    public ResponseEntity<String> modifyUsername(HttpServletRequest request, String username){
+    	UserDto userDto = userService.getMyUserWithAuthorities();
+    	return ResponseEntity.ok(userService.modifyUsername(userDto, username));
+    }
+    
+    @PostMapping("/user/modifyPassword")
+    public ResponseEntity<String> modifyPassword(@PathVariable String email, String password){
+    	return ResponseEntity.ok(userService.modifyPassword(email, password));
+    }
 }

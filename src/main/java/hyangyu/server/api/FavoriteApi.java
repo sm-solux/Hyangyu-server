@@ -92,7 +92,6 @@ public class FavoriteApi {
         Long userId = 1L;
         HttpHeaders httpHeaders = new HttpHeaders();
 
-
         //박람회 검색
         Optional<Festival> festival = festivalService.findOne(festivalId);
         if(festival.isEmpty()) {
