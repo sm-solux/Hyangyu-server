@@ -41,4 +41,11 @@ public class FairReviewService {
         fairReview.ifPresent(review -> review.updateFairReview(requestReviewDto.getContent(), requestReviewDto.getScore()));
         return fairReview;
     }
+
+    @Transactional
+    public Optional<FairReview> deleteFairReview(Long userId, Long fairId) {
+        Optional<FairReview> fairReview = Optional.ofNullable(fairReviewRepository.getFairReview(fairId, userId));
+        fairReview.ifPresent(fairReviewRepository::delete);
+        return fairReview;
+    }
 }

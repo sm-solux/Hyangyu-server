@@ -41,4 +41,11 @@ public class FestivalReviewService {
         festivalReview.ifPresent(review -> review.updateFestivalReview(requestReviewDto.getContent(), requestReviewDto.getScore()));
         return festivalReview;
     }
+
+    @Transactional
+    public Optional<FestivalReview> deleteFestivalReview(Long userId, Long festivalId) {
+        Optional<FestivalReview> festivalReview = Optional.ofNullable(festivalReviewRepository.getFestivalReview(festivalId, userId));
+        festivalReview.ifPresent(festivalReviewRepository::delete);
+        return festivalReview;
+    }
 }

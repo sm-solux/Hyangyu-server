@@ -3,6 +3,7 @@ package hyangyu.server.api;
 import hyangyu.server.domain.*;
 import hyangyu.server.dto.ErrorDto;
 import hyangyu.server.dto.RequestReviewDto;
+import hyangyu.server.dto.ResponseDto;
 import hyangyu.server.dto.SaveReviewResponseDto;
 import hyangyu.server.service.*;
 import lombok.RequiredArgsConstructor;
@@ -218,6 +219,87 @@ public class ReviewApi {
         } else {
             SaveReviewResponseDto saveReviewResponseDto = new SaveReviewResponseDto(200, "리뷰 수정이 완료되었습니다.");
             return new ResponseEntity(saveReviewResponseDto, httpHeaders, HttpStatus.OK);
+        }
+    }
+
+    @DeleteMapping("/review/display/{displayId}")
+    public ResponseEntity deleteDisplayReview(@PathVariable Long displayId) throws Exception {
+        // jwt 해독 코드 추후 추가
+        Long userId = 1L;
+        HttpHeaders httpHeaders = new HttpHeaders();
+
+        //전시 검색
+        Optional<Display> display = displayService.findOne(displayId);
+        if (display.isEmpty()) {
+            return new ResponseEntity(new ErrorDto(404, "잘못된 전시 번호입니다."), HttpStatus.BAD_REQUEST);
+        }
+
+        //사용자 검색
+        Optional<User> user = userService.findUser(userId);
+        if (user.isEmpty()) {
+            return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
+        }
+
+        Optional<DisplayReview> displayReview = displayReviewService.deleteDisplayReview(userId, displayId);
+        if (displayReview.isEmpty()) {
+            return new ResponseEntity(new ErrorDto(404, "삭제할 리뷰가 없습니다."), HttpStatus.BAD_REQUEST);
+        } else {
+            ResponseDto responseDto = new ResponseDto(200, "리뷰 삭제가 완료되었습니다.");
+            return new ResponseEntity(responseDto, httpHeaders, HttpStatus.OK);
+        }
+    }
+
+    @DeleteMapping("/review/fair/{fairId}")
+    public ResponseEntity deleteFairReview(@PathVariable Long fairId) throws Exception {
+        // jwt 해독 코드 추후 추가
+        Long userId = 1L;
+        HttpHeaders httpHeaders = new HttpHeaders();
+
+        //박람회 검색
+        Optional<Fair> fair = fairService.findOne(fairId);
+        if (fair.isEmpty()) {
+            return new ResponseEntity(new ErrorDto(404, "잘못된 박람회 번호입니다."), HttpStatus.BAD_REQUEST);
+        }
+
+        //사용자 검색
+        Optional<User> user = userService.findUser(userId);
+        if (user.isEmpty()) {
+            return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
+        }
+
+        Optional<FairReview> fairReview = fairReviewService.deleteFairReview(userId, fairId);
+        if (fairReview.isEmpty()) {
+            return new ResponseEntity(new ErrorDto(404, "삭제할 리뷰가 없습니다."), HttpStatus.BAD_REQUEST);
+        } else {
+            ResponseDto responseDto = new ResponseDto(200, "리뷰 삭제가 완료되었습니다.");
+            return new ResponseEntity(responseDto, httpHeaders, HttpStatus.OK);
+        }
+    }
+
+    @DeleteMapping("/review/festival/{festivalId}")
+    public ResponseEntity deleteFestivalReview(@PathVariable Long festivalId) throws Exception {
+        // jwt 해독 코드 추후 추가
+        Long userId = 1L;
+        HttpHeaders httpHeaders = new HttpHeaders();
+
+        //페스티벌 검색
+        Optional<Festival> festival = festivalService.findOne(festivalId);
+        if (festival.isEmpty()) {
+            return new ResponseEntity(new ErrorDto(404, "잘못된 페스티벌 번호입니다."), HttpStatus.BAD_REQUEST);
+        }
+
+        //사용자 검색
+        Optional<User> user = userService.findUser(userId);
+        if (user.isEmpty()) {
+            return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
+        }
+
+        Optional<FestivalReview> festivalReview = festivalReviewService.deleteFestivalReview(userId, festivalId);
+        if (festivalReview.isEmpty()) {
+            return new ResponseEntity(new ErrorDto(404, "삭제할 리뷰가 없습니다."), HttpStatus.BAD_REQUEST);
+        } else {
+            ResponseDto responseDto = new ResponseDto(200, "리뷰 삭제가 완료되었습니다.");
+            return new ResponseEntity(responseDto, httpHeaders, HttpStatus.OK);
         }
     }
 }
