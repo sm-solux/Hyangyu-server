@@ -1,5 +1,6 @@
 package hyangyu.server.saveFavoriteEvent;
 
+import hyangyu.server.domain.FavoriteDisplay;
 import hyangyu.server.domain.FavoriteFair;
 import hyangyu.server.domain.FavoriteFairId;
 import lombok.RequiredArgsConstructor;
@@ -20,4 +21,6 @@ public class FavoriteFairRepository {
     public FavoriteFair findOne(FavoriteFairId favoriteFairId) {
         return em.find(FavoriteFair.class, favoriteFairId);
     }
+
+    public void deleteFavoriteFair(FavoriteFair favoriteFair) { em.remove(em.find(FavoriteFair.class, favoriteFair.getFavoriteFairId()));}
 }
