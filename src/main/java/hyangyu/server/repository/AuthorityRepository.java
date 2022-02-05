@@ -1,4 +1,4 @@
-package hyangyu.server.saveFavoriteEvent;
+package hyangyu.server.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

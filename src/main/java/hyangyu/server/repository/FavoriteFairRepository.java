@@ -1,6 +1,5 @@
-package hyangyu.server.saveFavoriteEvent;
+package hyangyu.server.repository;
 
-import hyangyu.server.domain.FavoriteDisplay;
 import hyangyu.server.domain.FavoriteFair;
 import hyangyu.server.domain.FavoriteFairId;
 import lombok.RequiredArgsConstructor;
