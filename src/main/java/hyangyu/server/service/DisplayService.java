@@ -1,7 +1,7 @@
 package hyangyu.server.service;
 
 import hyangyu.server.domain.Display;
-import hyangyu.server.saveFavoriteEvent.DisplayRepository;
+import hyangyu.server.repository.DisplayRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

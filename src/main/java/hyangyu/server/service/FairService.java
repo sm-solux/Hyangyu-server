@@ -1,7 +1,7 @@
 package hyangyu.server.service;
 
 import hyangyu.server.domain.Fair;
-import hyangyu.server.saveFavoriteEvent.FairRepository;
+import hyangyu.server.repository.FairRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

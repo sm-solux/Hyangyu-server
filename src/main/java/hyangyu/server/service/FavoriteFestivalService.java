@@ -1,11 +1,10 @@
 package hyangyu.server.service;
 
 
-import hyangyu.server.domain.*;
 import hyangyu.server.domain.Festival;
 import hyangyu.server.domain.FavoriteFestival;
 import hyangyu.server.domain.User;
-import hyangyu.server.saveFavoriteEvent.*;
+import hyangyu.server.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
