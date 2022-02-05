@@ -9,16 +9,16 @@ import java.util.List;
 @AllArgsConstructor
 public class MyPageResponseDto {
 
-    String photo;
-    String username;
-    List<EventDto> displays;
-    List<EventDto> fairs;
-    List<EventDto> festivals;
-    List<ReviewDto> reveiws;
-
+    int status;
+    MyPageDto data;
     /*
 
     orderBy endDate
      */
+    static class MyPageDto {
+        String photo;
+        String username;
+        List<EventDto> displays;
+    }
 
 }
