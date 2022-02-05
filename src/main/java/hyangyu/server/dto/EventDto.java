@@ -1,4 +1,5 @@
 package hyangyu.server.dto;
+import hyangyu.server.domain.Display;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -25,7 +26,24 @@ public class EventDto {
     private String photo3;
     private int price;
     private boolean isSaved;
-    private List<ReviewDto> reviews;
+
+    public EventDto(Display display) {
+        this.title = display.getTitle();
+        this.startDate = display.getStartDate();
+        this.endDate = display.getEndDate();
+        this.weekdayOpen = display.getWeekdayOpen();
+        this.weekdayClose = display.getWeekdayClose();
+        this.weekendOpen = display.getWeekendOpen();
+        this.weekendClose = display.getWeekendClose();
+        this.location = display.getLocation();
+        this.site = display.getSite();
+        this.holiday = display.getHoliday();
+        this.content = display.getContent();
+        this.photo1 = display.getPhoto1();
+        this.photo2 = display.getPhoto2();
+        this.photo3 = display.getPhoto3();
+        this.price = display.getPrice();
+    }
 
 }
 

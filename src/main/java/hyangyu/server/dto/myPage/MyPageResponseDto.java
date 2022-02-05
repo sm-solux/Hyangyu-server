@@ -1,5 +1,6 @@
-package hyangyu.server.dto;
+package hyangyu.server.dto.myPage;
 
+import hyangyu.server.dto.EventDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -11,14 +12,5 @@ public class MyPageResponseDto {
 
     int status;
     MyPageDto data;
-    /*
-
-    orderBy endDate
-     */
-    static class MyPageDto {
-        String photo;
-        String username;
-        List<EventDto> displays;
-    }
 
 }
