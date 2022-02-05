@@ -1,6 +1,7 @@
 package hyangyu.server.api;
 
 import hyangyu.server.dto.ModificationDto;
+import hyangyu.server.dto.ResponseDto;
 import hyangyu.server.dto.UserDto;
 import hyangyu.server.domain.User;
 import hyangyu.server.service.UserService;
@@ -59,5 +60,12 @@ public class UserApi {
     @PostMapping("/user/modifyPassword")
     public ResponseEntity<String> modifyPassword(@RequestBody ModificationDto user){
     	return ResponseEntity.ok(userService.modifyPassword(user.getEmail(), user.getPassword()));
+    }
+    
+    @DeleteMapping("/user/deleteMyUser")
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
+    public ResponseEntity<ResponseDto> deleteMyUser(HttpServletRequest request){
+    	UserDto userDto = userService.getMyUserWithAuthorities();
+    	return ResponseEntity.ok(userService.deleteMyUser(userDto));
     }
 }
