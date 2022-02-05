@@ -1,4 +1,4 @@
-package hyangyu.server.saveFavoriteEvent;
+package hyangyu.server.repository;
 
 import hyangyu.server.domain.Display;
 import hyangyu.server.domain.FavoriteDisplay;
