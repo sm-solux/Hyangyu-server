@@ -1,10 +1,7 @@
 package hyangyu.server.api;
 
 import hyangyu.server.domain.*;
-import hyangyu.server.dto.ErrorDto;
-import hyangyu.server.dto.RequestReviewDto;
-import hyangyu.server.dto.ResponseDto;
-import hyangyu.server.dto.SaveReviewResponseDto;
+import hyangyu.server.dto.*;
 import hyangyu.server.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -29,8 +26,6 @@ public class ReviewApi {
 
     @PostMapping("/review/display/{displayId}")
     public ResponseEntity saveDisplayReview(@PathVariable Long displayId, @RequestBody RequestReviewDto requestReviewDto) throws Exception {
-        // jwt 해독 코드 추후 추가
-        Long userId = 1L;
         HttpHeaders httpHeaders = new HttpHeaders();
 
         //전시 검색
@@ -40,8 +35,8 @@ public class ReviewApi {
         }
 
         //사용자 검색
-        Optional<User> user = userService.findUser(userId);
-        if (user.isEmpty()) {
+        UserDto user = userService.getMyUserWithAuthorities();
+        if(user == null) {
             return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
         }
 
@@ -51,7 +46,7 @@ public class ReviewApi {
             return new ResponseEntity(new ErrorDto(404, "리뷰 길이가 300자를 초과합니다."), HttpStatus.BAD_REQUEST);
         }
 
-        int count = displayReviewService.saveDisplayReview(userId, displayId, requestReviewDto);
+        int count = displayReviewService.saveDisplayReview(user.getUserId(), displayId, requestReviewDto);
         if (count == 0) {
             SaveReviewResponseDto saveReviewResponseDto = new SaveReviewResponseDto(200, "리뷰 작성이 완료되었습니다.");
             return new ResponseEntity(saveReviewResponseDto, httpHeaders, HttpStatus.OK);
@@ -62,8 +57,6 @@ public class ReviewApi {
 
     @PostMapping("/review/fair/{fairId}")
     public ResponseEntity saveFairReview(@PathVariable Long fairId, @RequestBody RequestReviewDto requestReviewDto) throws Exception {
-        // jwt 해독 코드 추후 추가
-        Long userId = 1L;
         HttpHeaders httpHeaders = new HttpHeaders();
 
         //박람회 검색
@@ -73,8 +66,8 @@ public class ReviewApi {
         }
 
         //사용자 검색
-        Optional<User> user = userService.findUser(userId);
-        if (user.isEmpty()) {
+        UserDto user = userService.getMyUserWithAuthorities();
+        if(user == null) {
             return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
         }
 
@@ -84,7 +77,7 @@ public class ReviewApi {
             return new ResponseEntity(new ErrorDto(404, "리뷰 길이가 300자를 초과합니다."), HttpStatus.BAD_REQUEST);
         }
 
-        int count = fairReviewService.saveFairReview(userId, fairId, requestReviewDto);
+        int count = fairReviewService.saveFairReview(user.getUserId(), fairId, requestReviewDto);
         if (count == 0) {
             SaveReviewResponseDto saveReviewResponseDto = new SaveReviewResponseDto(200, "리뷰 작성이 완료되었습니다.");
             return new ResponseEntity(saveReviewResponseDto, httpHeaders, HttpStatus.OK);
@@ -95,8 +88,6 @@ public class ReviewApi {
 
     @PostMapping("/review/festival/{festivalId}")
     public ResponseEntity saveFestivalReview(@PathVariable Long festivalId, @RequestBody RequestReviewDto requestReviewDto) throws Exception {
-        // jwt 해독 코드 추후 추가
-        Long userId = 1L;
         HttpHeaders httpHeaders = new HttpHeaders();
 
         //페스티벌 검색
@@ -106,8 +97,8 @@ public class ReviewApi {
         }
 
         //사용자 검색
-        Optional<User> user = userService.findUser(userId);
-        if (user.isEmpty()) {
+        UserDto user = userService.getMyUserWithAuthorities();
+        if(user == null) {
             return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
         }
 
@@ -117,7 +108,7 @@ public class ReviewApi {
             return new ResponseEntity(new ErrorDto(404, "리뷰 길이가 300자를 초과합니다."), HttpStatus.BAD_REQUEST);
         }
 
-        int count = festivalReviewService.saveFestivalReview(userId, festivalId, requestReviewDto);
+        int count = festivalReviewService.saveFestivalReview(user.getUserId(), festivalId, requestReviewDto);
         if (count == 0) {
             SaveReviewResponseDto saveReviewResponseDto = new SaveReviewResponseDto(200, "리뷰 작성이 완료되었습니다.");
             return new ResponseEntity(saveReviewResponseDto, httpHeaders, HttpStatus.OK);
@@ -128,8 +119,6 @@ public class ReviewApi {
 
     @PostMapping("/review/change/display/{displayId}")
     public ResponseEntity updateDisplayReview(@PathVariable Long displayId, @RequestBody RequestReviewDto requestReviewDto) throws Exception {
-        // jwt 해독 코드 추후 추가
-        Long userId = 1L;
         HttpHeaders httpHeaders = new HttpHeaders();
 
         //전시 검색
@@ -139,8 +128,8 @@ public class ReviewApi {
         }
 
         //사용자 검색
-        Optional<User> user = userService.findUser(userId);
-        if (user.isEmpty()) {
+        UserDto user = userService.getMyUserWithAuthorities();
+        if(user == null) {
             return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
         }
 
@@ -149,7 +138,7 @@ public class ReviewApi {
         if (length > 300) {
             return new ResponseEntity(new ErrorDto(404, "리뷰 길이가 300자를 초과합니다."), HttpStatus.BAD_REQUEST);
         }
-        Optional<DisplayReview> displayReview = displayReviewService.modifyDisplayReview(userId, displayId, requestReviewDto);
+        Optional<DisplayReview> displayReview = displayReviewService.modifyDisplayReview(user.getUserId(), displayId, requestReviewDto);
         if (displayReview.isEmpty()) {
             return new ResponseEntity(new ErrorDto(404, "수정할 리뷰가 없습니다."), HttpStatus.BAD_REQUEST);
         } else {
@@ -160,8 +149,6 @@ public class ReviewApi {
 
     @PostMapping("/review/change/fair/{fairId}")
     public ResponseEntity updateFairReview(@PathVariable Long fairId, @RequestBody RequestReviewDto requestReviewDto) throws Exception {
-        // jwt 해독 코드 추후 추가
-        Long userId = 1L;
         HttpHeaders httpHeaders = new HttpHeaders();
 
         //박람회 검색
@@ -171,8 +158,8 @@ public class ReviewApi {
         }
 
         //사용자 검색
-        Optional<User> user = userService.findUser(userId);
-        if (user.isEmpty()) {
+        UserDto user = userService.getMyUserWithAuthorities();
+        if(user == null) {
             return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
         }
 
@@ -181,7 +168,7 @@ public class ReviewApi {
         if (length > 300) {
             return new ResponseEntity(new ErrorDto(404, "리뷰 길이가 300자를 초과합니다."), HttpStatus.BAD_REQUEST);
         }
-        Optional<FairReview> fairReview = fairReviewService.modifyFairReview(userId, fairId, requestReviewDto);
+        Optional<FairReview> fairReview = fairReviewService.modifyFairReview(user.getUserId(), fairId, requestReviewDto);
         if (fairReview.isEmpty()) {
             return new ResponseEntity(new ErrorDto(404, "수정할 리뷰가 없습니다."), HttpStatus.BAD_REQUEST);
         } else {
@@ -192,8 +179,6 @@ public class ReviewApi {
 
     @PostMapping("/review/change/festival/{festivalId}")
     public ResponseEntity updateFestivalReview(@PathVariable Long festivalId, @RequestBody RequestReviewDto requestReviewDto) throws Exception {
-        // jwt 해독 코드 추후 추가
-        Long userId = 1L;
         HttpHeaders httpHeaders = new HttpHeaders();
 
         //페스티벌 검색
@@ -203,8 +188,8 @@ public class ReviewApi {
         }
 
         //사용자 검색
-        Optional<User> user = userService.findUser(userId);
-        if (user.isEmpty()) {
+        UserDto user = userService.getMyUserWithAuthorities();
+        if(user == null) {
             return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
         }
 
@@ -213,7 +198,7 @@ public class ReviewApi {
         if (length > 300) {
             return new ResponseEntity(new ErrorDto(404, "리뷰 길이가 300자를 초과합니다."), HttpStatus.BAD_REQUEST);
         }
-        Optional<FestivalReview> festivalReview = festivalReviewService.modifyFestivalReview(userId, festivalId, requestReviewDto);
+        Optional<FestivalReview> festivalReview = festivalReviewService.modifyFestivalReview(user.getUserId(), festivalId, requestReviewDto);
         if (festivalReview.isEmpty()) {
             return new ResponseEntity(new ErrorDto(404, "수정할 리뷰가 없습니다."), HttpStatus.BAD_REQUEST);
         } else {
@@ -224,8 +209,6 @@ public class ReviewApi {
 
     @DeleteMapping("/review/display/{displayId}")
     public ResponseEntity deleteDisplayReview(@PathVariable Long displayId) throws Exception {
-        // jwt 해독 코드 추후 추가
-        Long userId = 1L;
         HttpHeaders httpHeaders = new HttpHeaders();
 
         //전시 검색
@@ -235,12 +218,12 @@ public class ReviewApi {
         }
 
         //사용자 검색
-        Optional<User> user = userService.findUser(userId);
-        if (user.isEmpty()) {
+        UserDto user = userService.getMyUserWithAuthorities();
+        if(user == null) {
             return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
         }
 
-        Optional<DisplayReview> displayReview = displayReviewService.deleteDisplayReview(userId, displayId);
+        Optional<DisplayReview> displayReview = displayReviewService.deleteDisplayReview(user.getUserId(), displayId);
         if (displayReview.isEmpty()) {
             return new ResponseEntity(new ErrorDto(404, "삭제할 리뷰가 없습니다."), HttpStatus.BAD_REQUEST);
         } else {
@@ -251,8 +234,6 @@ public class ReviewApi {
 
     @DeleteMapping("/review/fair/{fairId}")
     public ResponseEntity deleteFairReview(@PathVariable Long fairId) throws Exception {
-        // jwt 해독 코드 추후 추가
-        Long userId = 1L;
         HttpHeaders httpHeaders = new HttpHeaders();
 
         //박람회 검색
@@ -262,12 +243,12 @@ public class ReviewApi {
         }
 
         //사용자 검색
-        Optional<User> user = userService.findUser(userId);
-        if (user.isEmpty()) {
+        UserDto user = userService.getMyUserWithAuthorities();
+        if(user == null) {
             return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
         }
 
-        Optional<FairReview> fairReview = fairReviewService.deleteFairReview(userId, fairId);
+        Optional<FairReview> fairReview = fairReviewService.deleteFairReview(user.getUserId(), fairId);
         if (fairReview.isEmpty()) {
             return new ResponseEntity(new ErrorDto(404, "삭제할 리뷰가 없습니다."), HttpStatus.BAD_REQUEST);
         } else {
@@ -278,8 +259,6 @@ public class ReviewApi {
 
     @DeleteMapping("/review/festival/{festivalId}")
     public ResponseEntity deleteFestivalReview(@PathVariable Long festivalId) throws Exception {
-        // jwt 해독 코드 추후 추가
-        Long userId = 1L;
         HttpHeaders httpHeaders = new HttpHeaders();
 
         //페스티벌 검색
@@ -289,12 +268,12 @@ public class ReviewApi {
         }
 
         //사용자 검색
-        Optional<User> user = userService.findUser(userId);
-        if (user.isEmpty()) {
+        UserDto user = userService.getMyUserWithAuthorities();
+        if(user == null) {
             return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
         }
 
-        Optional<FestivalReview> festivalReview = festivalReviewService.deleteFestivalReview(userId, festivalId);
+        Optional<FestivalReview> festivalReview = festivalReviewService.deleteFestivalReview(user.getUserId(), festivalId);
         if (festivalReview.isEmpty()) {
             return new ResponseEntity(new ErrorDto(404, "삭제할 리뷰가 없습니다."), HttpStatus.BAD_REQUEST);
         } else {
