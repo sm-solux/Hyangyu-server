@@ -1,6 +1,7 @@
 package hyangyu.server.dto.myPage;
 
 import hyangyu.server.dto.EventDto;
+import hyangyu.server.dto.TestEventDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,4 +18,8 @@ public class MyPageDto {
     /*
     orderBy endDate
      */
+
+    public MyPageDto(List<EventDto> displays) {
+        this.displays = displays;
+    }
 }
