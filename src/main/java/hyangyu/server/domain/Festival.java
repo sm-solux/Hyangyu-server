@@ -1,8 +1,7 @@
 package hyangyu.server.domain;
 
-import hyangyu.server.dto.EventDto;
+import hyangyu.server.dto.TestEventDto;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -69,25 +68,23 @@ public class Festival {
     private int price;
 
     //생성 메서드
-    public static Festival createFestival(EventDto eventDto) {
+    public static Festival createFestival(TestEventDto testEventDto) {
         Festival festival = new Festival();
-        festival.startDate = eventDto.getStartDate();
-        festival.endDate = eventDto.getEndDate();
-        festival.title = eventDto.getTitle();
-        festival.likey = eventDto.getLikey();
-        festival.reviews = eventDto.getReviews();
-        festival.weekdayOpen = eventDto.getWeekdayOpen();
-        festival.weekdayClose = eventDto.getWeekdayClose();
-        festival.weekendOpen = eventDto.getWeekendOpen();
-        festival.weekendClose = eventDto.getWeekendClose();
-        festival.location = eventDto.getLocation();
-        festival.site = eventDto.getSite();
-        festival.holiday = eventDto.getHoliday();
-        festival.content = eventDto.getContent();
-        festival.photo1 = eventDto.getPhoto1();
-        festival.photo2 = eventDto.getPhoto2();
-        festival.photo3 = eventDto.getPhoto3();
-        festival.price = eventDto.getPrice();
+        festival.title = testEventDto.getTitle();
+        festival.startDate = testEventDto.getStartDate();
+        festival.endDate = testEventDto.getEndDate();
+        festival.weekdayOpen = testEventDto.getWeekdayOpen();
+        festival.weekdayClose = testEventDto.getWeekdayClose();
+        festival.weekendOpen = testEventDto.getWeekendOpen();
+        festival.weekendClose = testEventDto.getWeekendClose();
+        festival.location = testEventDto.getLocation();
+        festival.site = testEventDto.getSite();
+        festival.holiday = testEventDto.getHoliday();
+        festival.content = testEventDto.getContent();
+        festival.photo1 = testEventDto.getPhoto1();
+        festival.photo2 = testEventDto.getPhoto2();
+        festival.photo3 = testEventDto.getPhoto3();
+        festival.price = testEventDto.getPrice();
 
         return festival;
     }

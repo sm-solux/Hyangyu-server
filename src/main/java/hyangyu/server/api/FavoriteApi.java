@@ -2,7 +2,6 @@ package hyangyu.server.api;
 
 import hyangyu.server.domain.*;
 import hyangyu.server.dto.ErrorDto;
-import hyangyu.server.dto.EventDto;
 import hyangyu.server.dto.ResponseDto;
 import hyangyu.server.dto.UserDto;
 import hyangyu.server.service.*;
@@ -12,8 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
-import java.sql.Time;
 import java.util.Optional;
 
 @RestController
@@ -59,10 +56,6 @@ public class FavoriteApi {
     @PostMapping("/fair/{fairId}")
     public ResponseEntity saveFavoriteFair(@PathVariable Long fairId) throws Exception {
         HttpHeaders httpHeaders = new HttpHeaders();
-
-        EventDto eventDto = new EventDto(Date.valueOf("2021-01-24"), Date.valueOf("2021-01-28"), "테스트 박람회", 5, 0, Time.valueOf("09:00:00"), Time.valueOf("18:00:00"), Time.valueOf("09:00:00"), Time.valueOf("18:00:00"), "서울", "향유박람회", "매주 월요일", "세부내용", "", "", "", 0);
-        Fair fair1 = Fair.createFair(eventDto);
-        fairService.saveFair(fair1);
 
         //박람회 검색
         Optional<Fair> fair = fairService.findOne(fairId);

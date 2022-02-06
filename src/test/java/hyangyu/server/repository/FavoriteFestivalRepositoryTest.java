@@ -3,7 +3,7 @@ package hyangyu.server.repository;
 import hyangyu.server.domain.Festival;
 import hyangyu.server.domain.FavoriteFestival;
 import hyangyu.server.domain.User;
-import hyangyu.server.dto.EventDto;
+import hyangyu.server.dto.TestEventDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class FavoriteFestivalRepositoryTest {
         em.persist(user);
 
         //박람회 생성
-        EventDto eventDto = new EventDto(Date.valueOf("2021-01-24"), Date.valueOf("2021-01-28"), "테스트 전시2", 5, 0, Time.valueOf("09:00:00"), Time.valueOf("18:00:00"), Time.valueOf("09:00:00"), Time.valueOf("18:00:00"), "서울", "향유미술관", "매주 월요일", "세부내용", "", "", "", 0);
+        TestEventDto eventDto = new TestEventDto(Date.valueOf("2021-01-24"), Date.valueOf("2021-01-28"), "테스트 전시2", 5, 0, Time.valueOf("09:00:00"), Time.valueOf("18:00:00"), Time.valueOf("09:00:00"), Time.valueOf("18:00:00"), "서울", "향유미술관", "매주 월요일", "세부내용", "", "", "", 0);
         Festival festival = Festival.createFestival(eventDto);
 
         festivalRepository.saveFestival(festival);

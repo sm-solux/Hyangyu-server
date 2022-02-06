@@ -1,6 +1,6 @@
 package hyangyu.server.domain;
 
-import hyangyu.server.dto.EventDto;
+import hyangyu.server.dto.TestEventDto;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -68,25 +68,23 @@ public class Display {
     private int price;
 
     //생성 메서드
-    public static Display createDisplay(EventDto eventDto) {
+    public static Display createDisplay(TestEventDto testEventDto) {
         Display display = new Display();
-        display.startDate = eventDto.getStartDate();
-        display.endDate = eventDto.getEndDate();
-        display.title = eventDto.getTitle();
-        display.likey = eventDto.getLikey();
-        display.reviews = eventDto.getReviews();
-        display.weekdayOpen = eventDto.getWeekdayOpen();
-        display.weekdayClose = eventDto.getWeekdayClose();
-        display.weekendOpen = eventDto.getWeekendOpen();
-        display.weekendClose = eventDto.getWeekendClose();
-        display.location = eventDto.getLocation();
-        display.site = eventDto.getSite();
-        display.holiday = eventDto.getHoliday();
-        display.content = eventDto.getContent();
-        display.photo1 = eventDto.getPhoto1();
-        display.photo2 = eventDto.getPhoto2();
-        display.photo3 = eventDto.getPhoto3();
-        display.price = eventDto.getPrice();
+        display.title = testEventDto.getTitle();
+        display.startDate = testEventDto.getStartDate();
+        display.endDate = testEventDto.getEndDate();
+        display.weekdayOpen = testEventDto.getWeekdayOpen();
+        display.weekdayClose = testEventDto.getWeekdayClose();
+        display.weekendOpen = testEventDto.getWeekendOpen();
+        display.weekendClose = testEventDto.getWeekendClose();
+        display.location = testEventDto.getLocation();
+        display.site = testEventDto.getSite();
+        display.holiday = testEventDto.getHoliday();
+        display.content = testEventDto.getContent();
+        display.photo1 = testEventDto.getPhoto1();
+        display.photo2 = testEventDto.getPhoto2();
+        display.photo3 = testEventDto.getPhoto3();
+        display.price = testEventDto.getPrice();
 
         return display;
     }
