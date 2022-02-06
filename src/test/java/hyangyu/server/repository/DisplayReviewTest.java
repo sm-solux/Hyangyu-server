@@ -3,7 +3,7 @@ package hyangyu.server.repository;
 import hyangyu.server.domain.Display;
 import hyangyu.server.domain.DisplayReview;
 import hyangyu.server.domain.User;
-import hyangyu.server.dto.EventDto;
+import hyangyu.server.dto.TestEventDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ class DisplayReviewTest {
         User user = User.createUser("test@naver.com", "test1234", "향유", "sub", "token", "image");
         em.persist(user);
 
-        EventDto eventDto = new EventDto(Date.valueOf("2021-01-17"), Date.valueOf("2021-01-20"), "전시제목", 2, 0, Time.valueOf("09:00:00"), Time.valueOf("17:00:00"), Time.valueOf("09:00:00"), Time.valueOf("17:00:00"), "위치", "사이트주소", "매주 월요일", "내용", "사진1", "사진2", "사진3", 20000);
+        TestEventDto eventDto = new TestEventDto(Date.valueOf("2021-01-17"), Date.valueOf("2021-01-20"), "전시제목", 2, 0, Time.valueOf("09:00:00"), Time.valueOf("17:00:00"), Time.valueOf("09:00:00"), Time.valueOf("17:00:00"), "위치", "사이트주소", "매주 월요일", "내용", "사진1", "사진2", "사진3", 20000);
         Display display = Display.createDisplay(eventDto);
         em.persist(display);
 
@@ -56,7 +56,7 @@ class DisplayReviewTest {
         User user = User.createUser("test@naver.com", "test1234", "향유", "sub", "token", "image");
         em.persist(user);
 
-        EventDto eventDto = new EventDto(Date.valueOf("2021-01-17"), Date.valueOf("2021-01-20"), "전시제목", 2, 0, Time.valueOf("09:00:00"), Time.valueOf("17:00:00"), Time.valueOf("09:00:00"), Time.valueOf("17:00:00"), "위치", "사이트주소", "매주 월요일", "내용", "사진1", "사진2", "사진3", 20000);
+        TestEventDto eventDto = new TestEventDto(Date.valueOf("2021-01-17"), Date.valueOf("2021-01-20"), "전시제목", 2, 0, Time.valueOf("09:00:00"), Time.valueOf("17:00:00"), Time.valueOf("09:00:00"), Time.valueOf("17:00:00"), "위치", "사이트주소", "매주 월요일", "내용", "사진1", "사진2", "사진3", 20000);
         Display display = Display.createDisplay(eventDto);
         em.persist(display);
 
@@ -81,7 +81,7 @@ class DisplayReviewTest {
         User user = User.createUser("test@naver.com", "test1234", "향유", "sub", "token", "image");
         em.persist(user);
 
-        EventDto eventDto = new EventDto(Date.valueOf("2021-01-17"), Date.valueOf("2021-01-20"), "전시제목", 2, 0, Time.valueOf("09:00:00"), Time.valueOf("17:00:00"), Time.valueOf("09:00:00"), Time.valueOf("17:00:00"), "위치", "사이트주소", "매주 월요일", "내용", "사진1", "사진2", "사진3", 20000);
+        TestEventDto eventDto = new TestEventDto(Date.valueOf("2021-01-17"), Date.valueOf("2021-01-20"), "전시제목", 2, 0, Time.valueOf("09:00:00"), Time.valueOf("17:00:00"), Time.valueOf("09:00:00"), Time.valueOf("17:00:00"), "위치", "사이트주소", "매주 월요일", "내용", "사진1", "사진2", "사진3", 20000);
         Display display = Display.createDisplay(eventDto);
         em.persist(display);
 
