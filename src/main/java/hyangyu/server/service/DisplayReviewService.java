@@ -25,15 +25,17 @@ public class DisplayReviewService {
     private final DisplayRepository displayRepository;
 
     @Transactional(readOnly = false)
-    public int saveDisplayReview(Long userId, Long displayId, RequestReviewDto requestReviewDto) {
+    public Long saveDisplayReview(Long userId, Long displayId, RequestReviewDto requestReviewDto) {
         Optional<User> user = userRepository.findById(userId);
         Optional<Display> display = displayRepository.findOne(displayId);
         int count = displayReviewRepository.getCount(display.get().getDisplayId(), user.get().getUserId());
         if (count == 0) {
-            DisplayReview displayReview = DisplayReview.createDisplayReview(user.get(), display.get(), user.get().getUsername(), LocalDateTime.now(), requestReviewDto.getContent(), requestReviewDto.getScore());
-            displayReviewRepository.save(displayReview);
+            DisplayReview displayReview = DisplayReview.createDisplayReview(user.get(), display.get(), user.get().getUsername(), LocalDateTime.now(), requestReviewDto.getContent(), requestReviewDto.getScore(), 0);
+            DisplayReview savedDisplayReview = displayReviewRepository.save(displayReview);
+            return savedDisplayReview.getReviewId();
+        } else {
+            return -1L;
         }
-        return count;
     }
 
     @Transactional(readOnly = false)

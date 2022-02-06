@@ -39,7 +39,7 @@ class FairReviewTest {
         em.persist(fair);
 
         //when
-        FairReview fairReview = FairReview.createFairReview(user, fair, user.getUsername(), LocalDateTime.now(), "내용", 5);
+        FairReview fairReview = FairReview.createFairReview(user, fair, user.getUsername(), LocalDateTime.now(), "내용", 5, 0);
         FairReview savedFairReview = fairReviewRepository.save(fairReview);
         int count = fairReviewRepository.getCount(fair.getFairId(), user.getUserId());
 
@@ -60,7 +60,7 @@ class FairReviewTest {
         Fair fair = Fair.createFair(eventDto);
         em.persist(fair);
 
-        FairReview fairReview = FairReview.createFairReview(user, fair, user.getUsername(), LocalDateTime.now(), "내용", 5);
+        FairReview fairReview = FairReview.createFairReview(user, fair, user.getUsername(), LocalDateTime.now(), "내용", 5, 0);
         FairReview savedFairReview = fairReviewRepository.save(fairReview);
 
         //when
@@ -85,7 +85,7 @@ class FairReviewTest {
         Fair fair = Fair.createFair(eventDto);
         em.persist(fair);
 
-        FairReview fairReview = FairReview.createFairReview(user, fair, user.getUsername(), LocalDateTime.now(), "내용", 5);
+        FairReview fairReview = FairReview.createFairReview(user, fair, user.getUsername(), LocalDateTime.now(), "내용", 5, 0);
         fairReviewRepository.save(fairReview);
 
         //when

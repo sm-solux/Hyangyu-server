@@ -44,8 +44,11 @@ public class FairReview {
     @NotNull
     private Integer score;
 
+    @NotNull
+    private Integer warn;
+
     // 생성 메서드
-    public static FairReview createFairReview(User user, Fair fair, String nickname, LocalDateTime createTime, String content, Integer score) {
+    public static FairReview createFairReview(User user, Fair fair, String nickname, LocalDateTime createTime, String content, Integer score, Integer warn) {
         FairReview fairReview = new FairReview();
         fairReview.user = user;
         fairReview.fair = fair;
@@ -53,6 +56,7 @@ public class FairReview {
         fairReview.createTime = createTime;
         fairReview.content = content;
         fairReview.score = score;
+        fairReview.warn = warn;
         return fairReview;
     }
 

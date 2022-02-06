@@ -38,7 +38,7 @@ class FestivalReviewTest {
         em.persist(festival);
 
         //when
-        FestivalReview festivalReview = FestivalReview.createFestivalReview(user, festival, user.getUsername(), LocalDateTime.now(), "내용", 5);
+        FestivalReview festivalReview = FestivalReview.createFestivalReview(user, festival, user.getUsername(), LocalDateTime.now(), "내용", 5, 0);
         FestivalReview savedFestivalReview = festivalReviewRepository.save(festivalReview);
         int count = festivalReviewRepository.getCount(festival.getFestivalId(), user.getUserId());
 
@@ -59,7 +59,7 @@ class FestivalReviewTest {
         Festival festival = Festival.createFestival(eventDto);
         em.persist(festival);
 
-        FestivalReview festivalReview = FestivalReview.createFestivalReview(user, festival, user.getUsername(), LocalDateTime.now(), "내용", 5);
+        FestivalReview festivalReview = FestivalReview.createFestivalReview(user, festival, user.getUsername(), LocalDateTime.now(), "내용", 5, 0);
         FestivalReview savedFestivalReview = festivalReviewRepository.save(festivalReview);
 
         //when
@@ -84,7 +84,7 @@ class FestivalReviewTest {
         Festival festival = Festival.createFestival(eventDto);
         em.persist(festival);
 
-        FestivalReview festivalReview = FestivalReview.createFestivalReview(user, festival, user.getUsername(), LocalDateTime.now(), "내용", 5);
+        FestivalReview festivalReview = FestivalReview.createFestivalReview(user, festival, user.getUsername(), LocalDateTime.now(), "내용", 5, 0);
         festivalReviewRepository.save(festivalReview);
 
         //when
