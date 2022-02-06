@@ -46,12 +46,12 @@ public class ReviewApi {
             return new ResponseEntity(new ErrorDto(404, "리뷰 길이가 300자를 초과합니다."), HttpStatus.BAD_REQUEST);
         }
 
-        int count = displayReviewService.saveDisplayReview(user.getUserId(), displayId, requestReviewDto);
-        if (count == 0) {
-            SaveReviewResponseDto saveReviewResponseDto = new SaveReviewResponseDto(200, "리뷰 작성이 완료되었습니다.");
-            return new ResponseEntity(saveReviewResponseDto, httpHeaders, HttpStatus.OK);
-        } else {
+        Long reviewId = displayReviewService.saveDisplayReview(user.getUserId(), displayId, requestReviewDto);
+        if (reviewId == -1L) {
             return new ResponseEntity(new ErrorDto(404, "이미 전시에 대한 리뷰를 달았습니다."), HttpStatus.BAD_REQUEST);
+        } else {
+            SaveReviewResponseDto saveReviewResponseDto = new SaveReviewResponseDto(200, "리뷰 작성이 완료되었습니다.", reviewId);
+            return new ResponseEntity(saveReviewResponseDto, httpHeaders, HttpStatus.OK);
         }
     }
 
@@ -77,12 +77,12 @@ public class ReviewApi {
             return new ResponseEntity(new ErrorDto(404, "리뷰 길이가 300자를 초과합니다."), HttpStatus.BAD_REQUEST);
         }
 
-        int count = fairReviewService.saveFairReview(user.getUserId(), fairId, requestReviewDto);
-        if (count == 0) {
-            SaveReviewResponseDto saveReviewResponseDto = new SaveReviewResponseDto(200, "리뷰 작성이 완료되었습니다.");
-            return new ResponseEntity(saveReviewResponseDto, httpHeaders, HttpStatus.OK);
-        } else {
+        Long reviewId = fairReviewService.saveFairReview(user.getUserId(), fairId, requestReviewDto);
+        if (reviewId == -1L) {
             return new ResponseEntity(new ErrorDto(404, "이미 박람회에 대한 리뷰를 달았습니다."), HttpStatus.BAD_REQUEST);
+        } else {
+            SaveReviewResponseDto saveReviewResponseDto = new SaveReviewResponseDto(200, "리뷰 작성이 완료되었습니다.", reviewId);
+            return new ResponseEntity(saveReviewResponseDto, httpHeaders, HttpStatus.OK);
         }
     }
 
@@ -108,12 +108,12 @@ public class ReviewApi {
             return new ResponseEntity(new ErrorDto(404, "리뷰 길이가 300자를 초과합니다."), HttpStatus.BAD_REQUEST);
         }
 
-        int count = festivalReviewService.saveFestivalReview(user.getUserId(), festivalId, requestReviewDto);
-        if (count == 0) {
-            SaveReviewResponseDto saveReviewResponseDto = new SaveReviewResponseDto(200, "리뷰 작성이 완료되었습니다.");
-            return new ResponseEntity(saveReviewResponseDto, httpHeaders, HttpStatus.OK);
-        } else {
+        Long reviewId = festivalReviewService.saveFestivalReview(user.getUserId(), festivalId, requestReviewDto);
+        if (reviewId == -1L) {
             return new ResponseEntity(new ErrorDto(404, "이미 페스티벌에 대한 리뷰를 달았습니다."), HttpStatus.BAD_REQUEST);
+        } else {
+            SaveReviewResponseDto saveReviewResponseDto = new SaveReviewResponseDto(200, "리뷰 작성이 완료되었습니다.", reviewId);
+            return new ResponseEntity(saveReviewResponseDto, httpHeaders, HttpStatus.OK);
         }
     }
 
@@ -142,8 +142,8 @@ public class ReviewApi {
         if (displayReview.isEmpty()) {
             return new ResponseEntity(new ErrorDto(404, "수정할 리뷰가 없습니다."), HttpStatus.BAD_REQUEST);
         } else {
-            SaveReviewResponseDto saveReviewResponseDto = new SaveReviewResponseDto(200, "리뷰 수정이 완료되었습니다.");
-            return new ResponseEntity(saveReviewResponseDto, httpHeaders, HttpStatus.OK);
+            ResponseDto responseDto = new ResponseDto(200, "리뷰 수정이 완료되었습니다.");
+            return new ResponseEntity(responseDto, httpHeaders, HttpStatus.OK);
         }
     }
 
@@ -172,8 +172,8 @@ public class ReviewApi {
         if (fairReview.isEmpty()) {
             return new ResponseEntity(new ErrorDto(404, "수정할 리뷰가 없습니다."), HttpStatus.BAD_REQUEST);
         } else {
-            SaveReviewResponseDto saveReviewResponseDto = new SaveReviewResponseDto(200, "리뷰 수정이 완료되었습니다.");
-            return new ResponseEntity(saveReviewResponseDto, httpHeaders, HttpStatus.OK);
+            ResponseDto responseDto = new ResponseDto(200, "리뷰 수정이 완료되었습니다.");
+            return new ResponseEntity(responseDto, httpHeaders, HttpStatus.OK);
         }
     }
 
@@ -202,8 +202,8 @@ public class ReviewApi {
         if (festivalReview.isEmpty()) {
             return new ResponseEntity(new ErrorDto(404, "수정할 리뷰가 없습니다."), HttpStatus.BAD_REQUEST);
         } else {
-            SaveReviewResponseDto saveReviewResponseDto = new SaveReviewResponseDto(200, "리뷰 수정이 완료되었습니다.");
-            return new ResponseEntity(saveReviewResponseDto, httpHeaders, HttpStatus.OK);
+            ResponseDto responseDto = new ResponseDto(200, "리뷰 수정이 완료되었습니다.");
+            return new ResponseEntity(responseDto, httpHeaders, HttpStatus.OK);
         }
     }
 
@@ -281,4 +281,9 @@ public class ReviewApi {
             return new ResponseEntity(responseDto, httpHeaders, HttpStatus.OK);
         }
     }
+
+//    @PostMapping("/review/accuse/{eventId}/{userId}")
+//    public ResponseEntity accuseReview(@PathVariable Long eventId, @PathVariable Long userId, @RequestBody String event) throws Exception {
+//
+//    }
 }
