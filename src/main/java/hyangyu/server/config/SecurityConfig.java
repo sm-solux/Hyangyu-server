@@ -79,6 +79,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/UserApi/user/modifyUsername").permitAll()
                 .antMatchers("/api/UserApi/user/modifyPassword").permitAll()
                 .antMatchers("/api/UserApi/user/deleteMyUser").permitAll()
+                .antMatchers("/api/block/{reportedId}").permitAll()
+                .antMatchers("/api/unblock/{reportedId}").permitAll()
                 .antMatchers("/api/display/{displayId}").permitAll()
                 .antMatchers("/api/fair/{fairId}").permitAll()
                 .antMatchers("/api/festival/{festivalId}").permitAll()
