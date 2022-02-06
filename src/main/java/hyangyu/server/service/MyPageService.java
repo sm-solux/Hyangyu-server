@@ -14,8 +14,8 @@ public class MyPageService {
 
     private final MyPageRepository myPageRepository;
 
-    public MyPageDto getMyPage() {
-        MyPageDto myPageDto = myPageRepository.getMyPage();
+    public MyPageDto getMyPage(Long userId) {
+        MyPageDto myPageDto = myPageRepository.getMyPage(userId);
         return myPageDto;
     }
 }
