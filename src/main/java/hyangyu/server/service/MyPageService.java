@@ -1,5 +1,6 @@
 package hyangyu.server.service;
 
+import hyangyu.server.dto.myPage.MyEventDto;
 import hyangyu.server.dto.myPage.MyPageDto;
 import hyangyu.server.repository.MyPageRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,4 +19,10 @@ public class MyPageService {
         MyPageDto myPageDto = myPageRepository.getMyPage(userId);
         return myPageDto;
     }
+
+    public MyEventDto getMyDisplay(Long userId, int page) {
+        MyEventDto myEventDto = myPageRepository.getMyDisplay(userId, page);
+        return myEventDto;
+    }
+
 }
