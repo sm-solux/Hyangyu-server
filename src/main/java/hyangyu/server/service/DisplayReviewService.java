@@ -42,4 +42,11 @@ public class DisplayReviewService {
         displayReview.ifPresent(review -> review.updateDisplayReview(requestReviewDto.getContent(), requestReviewDto.getScore()));
         return displayReview;
     }
+
+    @Transactional
+    public Optional<DisplayReview> deleteDisplayReview(Long userId, Long displayId) {
+        Optional<DisplayReview> displayReview = Optional.ofNullable(displayReviewRepository.getDisplayReview(displayId, userId));
+        displayReview.ifPresent(displayReviewRepository::delete);
+        return displayReview;
+    }
 }

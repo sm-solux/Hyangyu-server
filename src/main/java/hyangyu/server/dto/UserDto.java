@@ -17,10 +17,12 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public class UserDto {
 	
+	private Long userId;
+	
 	@NotNull
 	@Size(max = 100)
 	private String email;
-	
+
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	@NotNull
 	@Size(min = 8, max = 200)
@@ -33,7 +35,6 @@ public class UserDto {
 	
 	private String sub;
 	
-	@NotNull
 	private String token;
 	
 	@Size(max = 50)
@@ -45,6 +46,7 @@ public static UserDto from(User user) {
 	if(user == null) return null;
 
 	return UserDto.builder()
+			  .userId(user.getUserId())
               .username(user.getUsername())
               .email(user.getEmail())
               .sub(user.getSub())

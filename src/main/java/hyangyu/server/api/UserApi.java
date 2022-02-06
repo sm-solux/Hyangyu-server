@@ -1,11 +1,15 @@
 package hyangyu.server.api;
 
+import hyangyu.server.dto.ModificationDto;
+import hyangyu.server.dto.ResponseDto;
 import hyangyu.server.dto.UserDto;
 import hyangyu.server.domain.User;
 import hyangyu.server.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import com.fasterxml.jackson.databind.node.TextNode;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -47,13 +51,21 @@ public class UserApi {
     
     @PostMapping("/user/modifyUsername")
     @PreAuthorize("hasAnyRole('USER','ADMIN')")
-    public ResponseEntity<String> modifyUsername(HttpServletRequest request, String username){
+    public ResponseEntity<String> modifyUsername(HttpServletRequest request, @RequestBody ModificationDto user){
     	UserDto userDto = userService.getMyUserWithAuthorities();
-    	return ResponseEntity.ok(userService.modifyUsername(userDto, username));
+    	String modifiedUsername = user.getUsername();
+    	return ResponseEntity.ok(userService.modifyUsername(userDto, modifiedUsername));
     }
     
     @PostMapping("/user/modifyPassword")
-    public ResponseEntity<String> modifyPassword(@PathVariable String email, String password){
-    	return ResponseEntity.ok(userService.modifyPassword(email, password));
+    public ResponseEntity<String> modifyPassword(@RequestBody ModificationDto user){
+    	return ResponseEntity.ok(userService.modifyPassword(user.getEmail(), user.getPassword()));
+    }
+    
+    @DeleteMapping("/user/deleteMyUser")
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
+    public ResponseEntity<ResponseDto> deleteMyUser(HttpServletRequest request){
+    	UserDto userDto = userService.getMyUserWithAuthorities();
+    	return ResponseEntity.ok(userService.deleteMyUser(userDto));
     }
 }

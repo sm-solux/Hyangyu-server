@@ -2,12 +2,16 @@ package hyangyu.server.service;
 
 import java.util.Collections;
 import java.util.Optional;
+
+import hyangyu.server.dto.ResponseDto;
 import hyangyu.server.dto.UserDto;
 import hyangyu.server.domain.Authority;
 import hyangyu.server.domain.User;
 import hyangyu.server.jwt.DuplicateMemberException;
 import hyangyu.server.repository.UserRepository;
 import hyangyu.server.jwt.SecurityUtil;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,9 +60,20 @@ public class UserService {
     @Transactional
     public String modifyPassword(String email, String password) {
     	User userEntity = userRepository.findByEmail(email).orElseThrow(() ->new IllegalArgumentException("해당 회원이 없습니다."));
+    	if(password.length()<8 || password.length() >20) {
+    		return "비밀번호는 8글자에서 20글자 사이어야 합니다.";
+    	}
     	userEntity.setPassword(passwordEncoder.encode(password));
     	
     	return email;
+    }
+    
+    @Transactional
+    public ResponseDto deleteMyUser(UserDto userDto) {
+    	User user = userRepository.findById(userDto.getUserId())
+    			.orElseThrow(()->new IllegalArgumentException("해당 회원이 존재하지 않습니다. id=" + userDto.getUserId()));
+    	userRepository.deleteById(userDto.getUserId());
+    	return new ResponseDto(HttpStatus.OK.value(),"회원 탈퇴가 완료되었습니다");
     }
 
     @Transactional(readOnly = true)
@@ -71,9 +86,4 @@ public class UserService {
         return UserDto.from(SecurityUtil.getCurrentEmail().flatMap(userRepository::findByEmail).orElse(null));
     }
 
-    @Transactional(readOnly = true)
-    public Optional<User> findUser(Long userId) throws Exception {
-        Optional<User> user = userRepository.findByUserId(userId);
-        return user;
-    }
 }

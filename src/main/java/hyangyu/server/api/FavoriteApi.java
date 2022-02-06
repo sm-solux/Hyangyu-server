@@ -4,6 +4,7 @@ import hyangyu.server.domain.*;
 import hyangyu.server.dto.ErrorDto;
 import hyangyu.server.dto.EventDto;
 import hyangyu.server.dto.ResponseDto;
+import hyangyu.server.dto.UserDto;
 import hyangyu.server.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -31,8 +32,6 @@ public class FavoriteApi {
 
     @PostMapping("/display/{displayId}")
     public ResponseEntity saveFavoriteDisplay(@PathVariable Long displayId) throws Exception {
-        //jwt 해독하는 코드 나오면 추후 수정
-        Long userId = 1L;
         HttpHeaders httpHeaders = new HttpHeaders();
 
         //전시 검색
@@ -42,13 +41,13 @@ public class FavoriteApi {
         }
 
         //사용자 검색
-        Optional<User> user = userService.findUser(userId);
-        if(user.isEmpty()) {
+        UserDto user = userService.getMyUserWithAuthorities();
+        if(user == null) {
             return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
         }
 
         //저장한 전시회 검색
-        Optional<FavoriteDisplay> favoriteDisplay = favoriteDisplayService.saveFavoriteDisplay(userId, displayId);
+        Optional<FavoriteDisplay> favoriteDisplay = favoriteDisplayService.saveFavoriteDisplay(user.getUserId(), displayId);
         if(favoriteDisplay.isPresent()) {
             return new ResponseEntity(new ErrorDto(404, "이미 저장한 전시회입니다."), HttpStatus.BAD_REQUEST);
         }
@@ -59,7 +58,6 @@ public class FavoriteApi {
 
     @PostMapping("/fair/{fairId}")
     public ResponseEntity saveFavoriteFair(@PathVariable Long fairId) throws Exception {
-        Long userId = 1L;
         HttpHeaders httpHeaders = new HttpHeaders();
 
         //박람회 검색
@@ -69,13 +67,13 @@ public class FavoriteApi {
         }
 
         //사용자 검색
-        Optional<User> user = userService.findUser(userId);
-        if(user.isEmpty()) {
+        UserDto user = userService.getMyUserWithAuthorities();
+        if(user == null) {
             return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
         }
 
         //저장한 전시회 검색
-        Optional<FavoriteFair> favoriteFair = favoriteFairService.saveFavoriteFair(userId, fairId);
+        Optional<FavoriteFair> favoriteFair = favoriteFairService.saveFavoriteFair(user.getUserId(), fairId);
         if(favoriteFair.isPresent()) {
             return new ResponseEntity(new ErrorDto(404, "이미 저장한 박람회입니다."), HttpStatus.BAD_REQUEST);
         }
@@ -86,7 +84,6 @@ public class FavoriteApi {
 
     @PostMapping("/festival/{festivalId}")
     public ResponseEntity saveFavoriteFestival(@PathVariable Long festivalId) throws Exception {
-        Long userId = 1L;
         HttpHeaders httpHeaders = new HttpHeaders();
 
         //박람회 검색
@@ -96,13 +93,13 @@ public class FavoriteApi {
         }
 
         //사용자 검색
-        Optional<User> user = userService.findUser(userId);
-        if(user.isEmpty()) {
+        UserDto user = userService.getMyUserWithAuthorities();
+        if(user == null) {
             return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
         }
 
         //저장한 전시회 검색
-        Optional<FavoriteFestival> favoriteFestival = favoriteFestivalService.saveFavoriteFestival(userId, festivalId);
+        Optional<FavoriteFestival> favoriteFestival = favoriteFestivalService.saveFavoriteFestival(user.getUserId(), festivalId);
         if(favoriteFestival.isPresent()) {
             return new ResponseEntity(new ErrorDto(404, "이미 저장한 페스티벌입니다."), HttpStatus.BAD_REQUEST);
         }
@@ -113,7 +110,6 @@ public class FavoriteApi {
 
     @DeleteMapping("/display/{displayId}")
     public ResponseEntity deleteFavoriteDisplay(@PathVariable Long displayId) throws Exception {
-        Long userId = 1L;
         HttpHeaders httpHeaders = new HttpHeaders();
 
         //전시 검색
@@ -123,13 +119,13 @@ public class FavoriteApi {
         }
 
         //사용자 검색
-        Optional<User> user = userService.findUser(userId);
-        if(user.isEmpty()) {
+        UserDto user = userService.getMyUserWithAuthorities();
+        if(user == null) {
             return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
         }
 
         //저장한 전시회 검색
-        Optional<FavoriteDisplay> favoriteDisplay = favoriteDisplayService.deleteFavoriteDisplay(userId, displayId);
+        Optional<FavoriteDisplay> favoriteDisplay = favoriteDisplayService.deleteFavoriteDisplay(user.getUserId(), displayId);
         if(favoriteDisplay.isEmpty()) {
             return new ResponseEntity(new ErrorDto(404, "저장하지 않은 전시회입니다."), HttpStatus.BAD_REQUEST);
         }
@@ -140,7 +136,6 @@ public class FavoriteApi {
 
     @DeleteMapping("/fair/{fairId}")
     public ResponseEntity deleteFavoriteFair(@PathVariable Long fairId) throws Exception {
-        Long userId = 1L;
         HttpHeaders httpHeaders = new HttpHeaders();
 
         //전시 검색
@@ -150,13 +145,13 @@ public class FavoriteApi {
         }
 
         //사용자 검색
-        Optional<User> user = userService.findUser(userId);
-        if(user.isEmpty()) {
+        UserDto user = userService.getMyUserWithAuthorities();
+        if(user == null) {
             return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
         }
 
         //저장한 전시회 검색
-        Optional<FavoriteFair> favoriteFair = favoriteFairService.deleteFavoriteFair(userId, fairId);
+        Optional<FavoriteFair> favoriteFair = favoriteFairService.deleteFavoriteFair(user.getUserId(), fairId);
         if(favoriteFair.isEmpty()) {
             return new ResponseEntity(new ErrorDto(404, "저장하지 않은 박람회입니다."), HttpStatus.BAD_REQUEST);
         }
@@ -167,7 +162,6 @@ public class FavoriteApi {
 
     @DeleteMapping("/festival/{festivalId}")
     public ResponseEntity deleteFavoriteFestival(@PathVariable Long festivalId) throws Exception {
-        Long userId = 1L;
         HttpHeaders httpHeaders = new HttpHeaders();
 
         //전시 검색
@@ -177,13 +171,13 @@ public class FavoriteApi {
         }
 
         //사용자 검색
-        Optional<User> user = userService.findUser(userId);
-        if(user.isEmpty()) {
+        UserDto user = userService.getMyUserWithAuthorities();
+        if(user == null) {
             return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
         }
 
         //저장한 전시회 검색
-        Optional<FavoriteFestival> favoriteFestival = favoriteFestivalService.deleteFavoriteFestival(userId, festivalId);
+        Optional<FavoriteFestival> favoriteFestival = favoriteFestivalService.deleteFavoriteFestival(user.getUserId(), festivalId);
         if(favoriteFestival.isEmpty()) {
             return new ResponseEntity(new ErrorDto(404, "저장하지 않은 페스티벌입니다."), HttpStatus.BAD_REQUEST);
         }

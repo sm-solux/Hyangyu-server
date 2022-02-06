@@ -73,4 +73,27 @@ class DisplayReviewTest {
         assertThat(updatedDisplayReview.getContent()).isEqualTo("수정된 내용");
         assertThat(updatedDisplayReview.getScore()).isEqualTo(3);
     }
+
+    @Test
+    @DisplayName("전시회 리뷰 삭제")
+    void deleteDisplayReview() throws Exception {
+        //given
+        User user = User.createUser("test@naver.com", "test1234", "향유", "sub", "token", "image");
+        em.persist(user);
+
+        EventDto eventDto = new EventDto(Date.valueOf("2021-01-17"), Date.valueOf("2021-01-20"), "전시제목", 2, 0, Time.valueOf("09:00:00"), Time.valueOf("17:00:00"), Time.valueOf("09:00:00"), Time.valueOf("17:00:00"), "위치", "사이트주소", "매주 월요일", "내용", "사진1", "사진2", "사진3", 20000);
+        Display display = Display.createDisplay(eventDto);
+        em.persist(display);
+
+        DisplayReview displayReview = DisplayReview.createDisplayReview(user, display, user.getUsername(), LocalDateTime.now(), "내용", 5);
+        displayReviewRepository.save(displayReview);
+
+        //when
+        DisplayReview findDisplayReview = displayReviewRepository.getDisplayReview(display.getDisplayId(), user.getUserId());
+        displayReviewRepository.delete(findDisplayReview);
+        int count = displayReviewRepository.getCount(display.getDisplayId(), user.getUserId());
+
+        //then
+        assertThat(count).isEqualTo(0);
+    }
 }
