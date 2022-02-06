@@ -1,19 +1,20 @@
-package hyangyu.server.dto.event;
-
+package hyangyu.server.dto;
 import hyangyu.server.domain.Display;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class DisplayDto {
-    private Long eventId;
-    private String title;
+public class EventDto {
     private Date startDate;
     private Date endDate;
+    private String title;
+    private int likey;
+    private int reviews;
     private Time weekdayOpen;
     private Time weekdayClose;
     private Time weekendOpen;
@@ -26,13 +27,13 @@ public class DisplayDto {
     private String photo2;
     private String photo3;
     private int price;
-    private boolean isSaved;
 
-    public DisplayDto(Display display) {
-        this.eventId = display.getDisplayId();
+    public EventDto(Display display) {
         this.startDate = display.getStartDate();
         this.endDate = display.getEndDate();
         this.title = display.getTitle();
+        this.likey = display.getLikey();
+        this.reviews = display.getReviews();
         this.weekdayOpen = display.getWeekdayOpen();
         this.weekdayClose = display.getWeekdayClose();
         this.weekendOpen = display.getWeekendOpen();
@@ -47,3 +48,5 @@ public class DisplayDto {
         this.price = display.getPrice();
     }
 }
+
+

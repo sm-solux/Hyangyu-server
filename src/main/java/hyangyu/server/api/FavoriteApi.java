@@ -2,7 +2,6 @@ package hyangyu.server.api;
 
 import hyangyu.server.domain.*;
 import hyangyu.server.dto.ErrorDto;
-import hyangyu.server.dto.EventDto;
 import hyangyu.server.dto.ResponseDto;
 import hyangyu.server.dto.UserDto;
 import hyangyu.server.service.*;
@@ -12,8 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
-import java.sql.Time;
 import java.util.Optional;
 
 @RestController
