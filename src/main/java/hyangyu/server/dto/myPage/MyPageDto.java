@@ -12,12 +12,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MyPageDto {
-    String image;
-    String username;
-    List<EventDto> displays;
-    /*
-    orderBy endDate
-     */
+    private String image;
+    private String username;
+    private List<EventDto> displays;
 
     public MyPageDto(List<EventDto> displays) {
         this.displays = displays;
