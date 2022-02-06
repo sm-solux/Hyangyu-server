@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class MyFairResponseDto {
+public class MyFestivalResponseDto {
     int status;
-    MyFairDto data;
+    MyFestivalDto data;
 }

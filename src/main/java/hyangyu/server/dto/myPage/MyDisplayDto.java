@@ -10,6 +10,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MyEventDto {
+public class MyDisplayDto {
     private List<EventDto> displays;
 }

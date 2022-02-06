@@ -10,6 +10,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MyFairDto {
-    private List<EventDto> fairs;
+public class MyFestivalDto {
+    private List<EventDto> festivals;
 }
