@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class MyEventResponseDto {
+public class MyDisplayResponseDto {
     int status;
-    MyEventDto data;
+    MyDisplayDto data;
 }
