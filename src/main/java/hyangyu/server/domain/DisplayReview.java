@@ -41,8 +41,11 @@ public class DisplayReview {
     @NotNull
     private Integer score;
 
+    @NotNull
+    private Integer warn;
+
     // 생성 메서드
-    public static DisplayReview createDisplayReview(User user, Display display, String nickname, LocalDateTime createTime, String content, Integer score) {
+    public static DisplayReview createDisplayReview(User user, Display display, String nickname, LocalDateTime createTime, String content, Integer score, Integer warn) {
         DisplayReview displayReview = new DisplayReview();
         displayReview.user = user;
         displayReview.display = display;
@@ -50,6 +53,7 @@ public class DisplayReview {
         displayReview.createTime = createTime;
         displayReview.content = content;
         displayReview.score = score;
+        displayReview.warn = warn;
         return displayReview;
     }
 

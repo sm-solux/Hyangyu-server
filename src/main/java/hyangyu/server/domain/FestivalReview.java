@@ -44,8 +44,11 @@ public class FestivalReview {
     @NotNull
     private Integer score;
 
+    @NotNull
+    private Integer warn;
+
     // 생성 메서드
-    public static FestivalReview createFestivalReview(User user, Festival festival, String nickname, LocalDateTime createTime, String content, Integer score) {
+    public static FestivalReview createFestivalReview(User user, Festival festival, String nickname, LocalDateTime createTime, String content, Integer score, Integer warn) {
         FestivalReview festivalReview = new FestivalReview();
         festivalReview.user = user;
         festivalReview.festival = festival;
@@ -53,6 +56,7 @@ public class FestivalReview {
         festivalReview.createTime = createTime;
         festivalReview.content = content;
         festivalReview.score = score;
+        festivalReview.warn = warn;
         return festivalReview;
     }
 
