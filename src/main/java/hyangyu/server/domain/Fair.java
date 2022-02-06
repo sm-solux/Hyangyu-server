@@ -1,8 +1,7 @@
 package hyangyu.server.domain;
 
-import hyangyu.server.dto.EventDto;
+import hyangyu.server.dto.TestEventDto;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -69,23 +68,23 @@ public class Fair {
     private int price;
 
     //생성 메서드
-    public static Fair createFair(EventDto eventDto) {
+    public static Fair createFair(TestEventDto testEventDto) {
         Fair fair = new Fair();
-        fair.title = eventDto.getTitle();
-        fair.startDate = eventDto.getStartDate();
-        fair.endDate = eventDto.getEndDate();
-        fair.weekdayOpen = eventDto.getWeekdayOpen();
-        fair.weekdayClose = eventDto.getWeekdayClose();
-        fair.weekendOpen = eventDto.getWeekendOpen();
-        fair.weekendClose = eventDto.getWeekendClose();
-        fair.location = eventDto.getLocation();
-        fair.site = eventDto.getSite();
-        fair.holiday = eventDto.getHoliday();
-        fair.content = eventDto.getContent();
-        fair.photo1 = eventDto.getPhoto1();
-        fair.photo2 = eventDto.getPhoto2();
-        fair.photo3 = eventDto.getPhoto3();
-        fair.price = eventDto.getPrice();
+        fair.title = testEventDto.getTitle();
+        fair.startDate = testEventDto.getStartDate();
+        fair.endDate = testEventDto.getEndDate();
+        fair.weekdayOpen = testEventDto.getWeekdayOpen();
+        fair.weekdayClose = testEventDto.getWeekdayClose();
+        fair.weekendOpen = testEventDto.getWeekendOpen();
+        fair.weekendClose = testEventDto.getWeekendClose();
+        fair.location = testEventDto.getLocation();
+        fair.site = testEventDto.getSite();
+        fair.holiday = testEventDto.getHoliday();
+        fair.content = testEventDto.getContent();
+        fair.photo1 = testEventDto.getPhoto1();
+        fair.photo2 = testEventDto.getPhoto2();
+        fair.photo3 = testEventDto.getPhoto3();
+        fair.price = testEventDto.getPrice();
 
         return fair;
     }
