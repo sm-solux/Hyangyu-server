@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class EventDto {
+public class TestEventDto {
     private Date startDate;
     private Date endDate;
     private String title;
@@ -28,7 +28,7 @@ public class EventDto {
     private String photo3;
     private int price;
 
-    public EventDto(Display display) {
+    public TestEventDto(Display display) {
         this.startDate = display.getStartDate();
         this.endDate = display.getEndDate();
         this.title = display.getTitle();
