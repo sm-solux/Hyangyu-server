@@ -8,4 +8,5 @@ import lombok.Data;
 public class SaveReviewResponseDto {
     int status;
     String message;
+    Long reviewId;
 }
