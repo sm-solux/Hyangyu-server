@@ -36,7 +36,7 @@ public class ReviewApi {
 
         //사용자 검색
         UserDto user = userService.getMyUserWithAuthorities();
-        if(user == null) {
+        if (user == null) {
             return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
         }
 
@@ -67,7 +67,7 @@ public class ReviewApi {
 
         //사용자 검색
         UserDto user = userService.getMyUserWithAuthorities();
-        if(user == null) {
+        if (user == null) {
             return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
         }
 
@@ -98,7 +98,7 @@ public class ReviewApi {
 
         //사용자 검색
         UserDto user = userService.getMyUserWithAuthorities();
-        if(user == null) {
+        if (user == null) {
             return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
         }
 
@@ -129,7 +129,7 @@ public class ReviewApi {
 
         //사용자 검색
         UserDto user = userService.getMyUserWithAuthorities();
-        if(user == null) {
+        if (user == null) {
             return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
         }
 
@@ -159,7 +159,7 @@ public class ReviewApi {
 
         //사용자 검색
         UserDto user = userService.getMyUserWithAuthorities();
-        if(user == null) {
+        if (user == null) {
             return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
         }
 
@@ -189,7 +189,7 @@ public class ReviewApi {
 
         //사용자 검색
         UserDto user = userService.getMyUserWithAuthorities();
-        if(user == null) {
+        if (user == null) {
             return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
         }
 
@@ -219,7 +219,7 @@ public class ReviewApi {
 
         //사용자 검색
         UserDto user = userService.getMyUserWithAuthorities();
-        if(user == null) {
+        if (user == null) {
             return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
         }
 
@@ -244,7 +244,7 @@ public class ReviewApi {
 
         //사용자 검색
         UserDto user = userService.getMyUserWithAuthorities();
-        if(user == null) {
+        if (user == null) {
             return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
         }
 
@@ -269,7 +269,7 @@ public class ReviewApi {
 
         //사용자 검색
         UserDto user = userService.getMyUserWithAuthorities();
-        if(user == null) {
+        if (user == null) {
             return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
         }
 
@@ -282,8 +282,66 @@ public class ReviewApi {
         }
     }
 
-//    @PostMapping("/review/accuse/{eventId}/{userId}")
-//    public ResponseEntity accuseReview(@PathVariable Long eventId, @PathVariable Long userId, @RequestBody String event) throws Exception {
-//
-//    }
+    @PostMapping("/review/accuse/{event}/{reviewId}")
+    public ResponseEntity accuseReview(@PathVariable Long reviewId, @PathVariable String event) throws Exception {
+        //사용자 검색
+        UserDto user = userService.getMyUserWithAuthorities();
+        if (user == null) {
+            return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
+        }
+
+        if (event.equals("display")) {
+            //리뷰 검색
+            Optional<DisplayReview> displayReview = displayReviewService.findReview(reviewId);
+            if (displayReview.isEmpty()) {
+                return new ResponseEntity(new ErrorDto(404, "신고할 리뷰가 없습니다."), HttpStatus.BAD_REQUEST);
+            } else {
+                String message = displayReviewService.accuseDisplayReview(displayReview.get(), user.getUserId());
+                if (message.equals("내가 쓴 리뷰는 신고할 수 없습니다.")) {
+                    return new ResponseEntity(new ErrorDto(404, message), HttpStatus.BAD_REQUEST);
+                }
+                if (message.equals("이미 신고한 리뷰입니다.")) {
+                    return new ResponseEntity(new ErrorDto(404, message), HttpStatus.BAD_REQUEST);
+                }
+                ResponseDto responseDto = new ResponseDto(200, message);
+                return new ResponseEntity(responseDto, HttpStatus.OK);
+            }
+
+        } else if (event.equals("fair")) {
+            //리뷰 검색
+            Optional<FairReview> fairReview = fairReviewService.findReview(reviewId);
+            if (fairReview.isEmpty()) {
+                return new ResponseEntity(new ErrorDto(404, "신고할 리뷰가 없습니다."), HttpStatus.BAD_REQUEST);
+            } else {
+                String message = fairReviewService.accuseFairReview(fairReview.get(), user.getUserId());
+                if (message.equals("내가 쓴 리뷰는 신고할 수 없습니다.")) {
+                    return new ResponseEntity(new ErrorDto(404, message), HttpStatus.BAD_REQUEST);
+                }
+                if (message.equals("이미 신고한 리뷰입니다.")) {
+                    return new ResponseEntity(new ErrorDto(404, message), HttpStatus.BAD_REQUEST);
+                }
+                ResponseDto responseDto = new ResponseDto(200, message);
+                return new ResponseEntity(responseDto, HttpStatus.OK);
+            }
+
+        } else if (event.equals("festival")) {
+            //리뷰 검색
+            Optional<FestivalReview> festivalReview = festivalReviewService.findReview(reviewId);
+            if (festivalReview.isEmpty()) {
+                return new ResponseEntity(new ErrorDto(404, "신고할 리뷰가 없습니다."), HttpStatus.BAD_REQUEST);
+            } else {
+                String message = festivalReviewService.accuseFestivalReview(festivalReview.get(), user.getUserId());
+                if (message.equals("내가 쓴 리뷰는 신고할 수 없습니다.")) {
+                    return new ResponseEntity(new ErrorDto(404, message), HttpStatus.BAD_REQUEST);
+                }
+                if (message.equals("이미 신고한 리뷰입니다.")) {
+                    return new ResponseEntity(new ErrorDto(404, message), HttpStatus.BAD_REQUEST);
+                }
+                ResponseDto responseDto = new ResponseDto(200, message);
+                return new ResponseEntity(responseDto, HttpStatus.OK);
+            }
+        } else {
+            return new ResponseEntity(new ErrorDto(404, "이벤트명이 잘못되었습니다."), HttpStatus.BAD_REQUEST);
+        }
+    }
 }
