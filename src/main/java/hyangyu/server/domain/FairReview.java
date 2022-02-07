@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -28,6 +30,9 @@ public class FairReview {
     @JoinColumn(name = "fair_id")
     @NotNull
     private Fair fair;
+
+    @OneToMany(mappedBy = "fairReview", cascade = CascadeType.ALL)
+    private List<FairWarn> warnList = new ArrayList<>();
 
     @NotNull
     @Column(length = 20)
@@ -63,5 +68,9 @@ public class FairReview {
     public void updateFairReview(String content, Integer score) {
         this.content = content;
         this.score = score;
+    }
+
+    public void increaseWarn() {
+        this.warn += 1;
     }
 }
