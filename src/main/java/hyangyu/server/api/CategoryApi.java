@@ -2,11 +2,9 @@ package hyangyu.server.api;
 
 import hyangyu.server.dto.ErrorDto;
 import hyangyu.server.dto.UserDto;
-import hyangyu.server.dto.event.DisplayDto;
-import hyangyu.server.dto.event.DisplayResponseDto;
+import hyangyu.server.dto.event.*;
 import hyangyu.server.repository.DisplayRepository;
-import hyangyu.server.repository.FairRepository;
-import hyangyu.server.repository.FestivalRepository;
+import hyangyu.server.service.MyPageService;
 import hyangyu.server.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -22,22 +20,26 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class CategoryApi {
 
-    private UserService userService;
-    private DisplayRepository displayRepository;
-    private FairRepository fairRepository;
-    private FestivalRepository festivalRepository;
+    private final UserService userService;
+    private final DisplayRepository displayRepository;
 
-    @GetMapping("/display//{order}/{page}")
-    public ResponseEntity getMyDisplay(@PathVariable String order, int page) throws Exception {
+    @GetMapping("/display/{order}/{page}")
+    public ResponseEntity getCategory(@PathVariable("order") String order, @PathVariable("page") int page) throws Exception {
         HttpHeaders httpHeaders = new HttpHeaders();
 
         //사용자 검색
         UserDto user = userService.getMyUserWithAuthorities();
-        if(user == null) {
+        if (user == null) {
             return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
         }
 
+        //order 파라미터 확인
+        if (!order.equals("latest") && !order.equals("popularity") && !order.equals("charge") && !order.equals("free")) {
+            return new ResponseEntity(new ErrorDto(404, "파라미터를 확인해주세요."), HttpStatus.BAD_REQUEST);
+        }
+
         DisplayDto myDisplay = displayRepository.getDisplay(user.getUserId(), order, page);
+
         DisplayResponseDto myPageResponseDto = new DisplayResponseDto(200, myDisplay);
         return new ResponseEntity<>(myPageResponseDto, httpHeaders, HttpStatus.OK);
     }
