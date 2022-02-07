@@ -1,9 +1,9 @@
 package hyangyu.server.service;
 
-import hyangyu.server.dto.myPage.MyDisplayDto;
-import hyangyu.server.dto.myPage.MyFairDto;
-import hyangyu.server.dto.myPage.MyFestivalDto;
-import hyangyu.server.dto.myPage.MyPageDto;
+import hyangyu.server.dto.event.DisplayDto;
+import hyangyu.server.dto.event.FairDto;
+import hyangyu.server.dto.event.FestivalDto;
+import hyangyu.server.dto.event.MyPageDto;
 import hyangyu.server.repository.MyPageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,18 +21,18 @@ public class MyPageService {
         return myPageDto;
     }
 
-    public MyDisplayDto getMyDisplay(Long userId, int page) {
-        MyDisplayDto myDisplayDto = myPageRepository.getMyDisplay(userId, page);
+    public DisplayDto getMyDisplay(Long userId, int page) {
+        DisplayDto myDisplayDto = myPageRepository.getMyDisplay(userId, page);
         return myDisplayDto;
     }
 
-    public MyFairDto getMyFair(Long userId, int page) {
-        MyFairDto myFairDto = myPageRepository.getMyFair(userId, page);
+    public FairDto getMyFair(Long userId, int page) {
+        FairDto myFairDto = myPageRepository.getMyFair(userId, page);
         return myFairDto;
     }
 
-    public MyFestivalDto getMyFestival(Long userId, int page) {
-        MyFestivalDto myFestivalDto = myPageRepository.getMyFestival(userId, page);
+    public FestivalDto getMyFestival(Long userId, int page) {
+        FestivalDto myFestivalDto = myPageRepository.getMyFestival(userId, page);
         return myFestivalDto;
     }
 }

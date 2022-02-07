@@ -1,11 +1,11 @@
-package hyangyu.server.dto.myPage;
+package hyangyu.server.dto.event;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class MyFestivalResponseDto {
+public class FairResponseDto {
     int status;
-    MyFestivalDto data;
+    FairDto data;
 }
