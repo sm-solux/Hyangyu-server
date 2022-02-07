@@ -32,7 +32,7 @@ public class MyPageRepository {
         List<Display> displays = queryFactory.select(favoriteDisplay.display)
                 .from(favoriteDisplay)
                 .where(favoriteDisplay.user.userId.castToNum(Long.class).eq(userId))
-                .orderBy(favoriteDisplay.display.endDate.desc())
+                .orderBy(favoriteDisplay.display.endDate.asc())
                 .limit(10)
                 .fetch();
 
@@ -54,7 +54,7 @@ public class MyPageRepository {
         List<Display> displays = queryFactory.select(favoriteDisplay.display)
                 .from(favoriteDisplay)
                 .where(favoriteDisplay.user.userId.castToNum(Long.class).eq(userId))
-                .orderBy(favoriteDisplay.display.endDate.desc())
+                .orderBy(favoriteDisplay.display.endDate.asc())
                 .offset(page*10)
                 .limit(10)
                 .fetch();
@@ -77,7 +77,7 @@ public class MyPageRepository {
         List<Fair> fairs = queryFactory.select(favoriteFair.fair)
                 .from(favoriteFair)
                 .where(favoriteFair.user.userId.castToNum(Long.class).eq(userId))
-                .orderBy(favoriteFair.fair.endDate.desc())
+                .orderBy(favoriteFair.fair.endDate.asc())
                 .offset(page*10)
                 .limit(10)
                 .fetch();
@@ -100,7 +100,7 @@ public class MyPageRepository {
         List<Festival> festivals = queryFactory.select(favoriteFestival.festival)
                 .from(favoriteFestival)
                 .where(favoriteFestival.user.userId.castToNum(Long.class).eq(userId))
-                .orderBy(favoriteFestival.festival.endDate.desc())
+                .orderBy(favoriteFestival.festival.endDate.asc())
                 .offset(page*10)
                 .limit(10)
                 .fetch();
