@@ -6,6 +6,8 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -25,6 +27,9 @@ public class DisplayReview {
     @JoinColumn(name = "display_id")
     @NotNull
     private Display display;
+
+    @OneToMany(mappedBy = "displayReview", cascade = CascadeType.ALL)
+    private List<DisplayWarn> warnList = new ArrayList<>();
 
     @NotNull
     @Column(length = 20)
@@ -60,5 +65,9 @@ public class DisplayReview {
     public void updateDisplayReview(String content, Integer score) {
         this.content = content;
         this.score = score;
+    }
+
+    public void increaseWarn() {
+        this.warn += 1;
     }
 }
