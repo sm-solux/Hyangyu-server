@@ -50,22 +50,22 @@ public class UserService {
     }
     
     @Transactional
-    public String modifyUsername(UserDto userDto, String username) {
+    public ResponseDto modifyUsername(UserDto userDto, String username) {
     	User userEntity = userRepository.findByEmail(userDto.getEmail()).orElseThrow(() ->new IllegalArgumentException("해당 회원이 없습니다."));
     	userEntity.setUsername(username);
     	
-    	return username;
+    	return new ResponseDto(HttpStatus.OK.value(), "닉네임이 변경되었습니다.");
     }
     
     @Transactional
-    public String modifyPassword(String email, String password) {
+    public ResponseDto modifyPassword(String email, String password) {
     	User userEntity = userRepository.findByEmail(email).orElseThrow(() ->new IllegalArgumentException("해당 회원이 없습니다."));
     	if(password.length()<8 || password.length() >20) {
-    		return "비밀번호는 8글자에서 20글자 사이어야 합니다.";
+    		return new ResponseDto(HttpStatus.BAD_REQUEST.value(),"비밀번호는 8글자에서 20글자 사이어야 합니다.");
     	}
     	userEntity.setPassword(passwordEncoder.encode(password));
     	
-    	return email;
+    	return new ResponseDto(HttpStatus.OK.value(), email+"님의 비밀번호가 변경되었습니다.");
     }
     
     @Transactional
