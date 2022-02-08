@@ -5,6 +5,7 @@ import hyangyu.server.domain.DisplayReview;
 import hyangyu.server.domain.DisplayWarn;
 import hyangyu.server.domain.User;
 import hyangyu.server.dto.RequestReviewDto;
+import hyangyu.server.dto.ReviewDto;
 import hyangyu.server.repository.DisplayRepository;
 import hyangyu.server.repository.DisplayReviewRepository;
 import hyangyu.server.repository.DisplayWarnRepository;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -78,5 +80,9 @@ public class DisplayReviewService {
         }
 
         return "신고가 완료되었습니다.";
+    }
+
+    public List<ReviewDto> getDisplayReviews(Long displayId) {
+        return displayReviewRepository.getDisplayReviews(displayId);
     }
 }
