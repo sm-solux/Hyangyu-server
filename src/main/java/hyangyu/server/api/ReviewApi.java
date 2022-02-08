@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -343,5 +344,18 @@ public class ReviewApi {
         } else {
             return new ResponseEntity(new ErrorDto(404, "이벤트명이 잘못되었습니다."), HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/show/review/display/{displayId}")
+    public ResponseEntity getDisplayReviews(@PathVariable Long displayId) throws Exception {
+        //전시 검색
+        Optional<Display> display = displayService.findOne(displayId);
+        if (display.isEmpty()) {
+            return new ResponseEntity(new ErrorDto(404, "잘못된 전시 번호입니다."), HttpStatus.BAD_REQUEST);
+        }
+
+        List<ReviewDto> displayReviews = displayReviewService.getDisplayReviews(displayId);
+        ReviewsResponseDto reviewResponseDto = new ReviewsResponseDto(200, displayReviews);
+        return new ResponseEntity(reviewResponseDto, HttpStatus.OK);
     }
 }

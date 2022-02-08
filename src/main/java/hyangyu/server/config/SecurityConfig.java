@@ -93,6 +93,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/review/change/fair/{fairId}").permitAll()
                 .antMatchers("/api/review/change/festival/{festivalId}").permitAll()
                 .antMatchers("/api/review/accuse/{event}/{reviewId}").permitAll()
+                .antMatchers("/api/show/review/display/{displayId}").permitAll()
+                .antMatchers("/api/show/review/fair/{fairId}").permitAll()
+                .antMatchers("/api/show/review/festival/{festivalId}").permitAll()
                 .anyRequest().authenticated()
 
                 .and()
