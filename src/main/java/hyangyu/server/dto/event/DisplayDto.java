@@ -1,4 +1,4 @@
-package hyangyu.server.dto.myPage;
+package hyangyu.server.dto.event;
 
 import hyangyu.server.dto.EventDto;
 import lombok.AllArgsConstructor;
@@ -10,6 +10,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MyFestivalDto {
-    private List<EventDto> festivals;
+public class DisplayDto {
+    private List<EventDto> displays;
 }

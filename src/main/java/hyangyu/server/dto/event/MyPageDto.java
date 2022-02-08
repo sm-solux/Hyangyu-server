@@ -1,7 +1,6 @@
-package hyangyu.server.dto.myPage;
+package hyangyu.server.dto.event;
 
 import hyangyu.server.dto.EventDto;
-import hyangyu.server.dto.TestEventDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

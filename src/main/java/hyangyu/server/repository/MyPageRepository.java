@@ -3,10 +3,10 @@ package hyangyu.server.repository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import hyangyu.server.domain.*;
 import hyangyu.server.dto.EventDto;
-import hyangyu.server.dto.myPage.MyDisplayDto;
-import hyangyu.server.dto.myPage.MyFairDto;
-import hyangyu.server.dto.myPage.MyFestivalDto;
-import hyangyu.server.dto.myPage.MyPageDto;
+import hyangyu.server.dto.event.DisplayDto;
+import hyangyu.server.dto.event.FairDto;
+import hyangyu.server.dto.event.FestivalDto;
+import hyangyu.server.dto.event.MyPageDto;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -32,7 +32,7 @@ public class MyPageRepository {
         List<Display> displays = queryFactory.select(favoriteDisplay.display)
                 .from(favoriteDisplay)
                 .where(favoriteDisplay.user.userId.castToNum(Long.class).eq(userId))
-                .orderBy(favoriteDisplay.display.endDate.desc())
+                .orderBy(favoriteDisplay.display.endDate.asc())
                 .limit(10)
                 .fetch();
 
@@ -49,12 +49,12 @@ public class MyPageRepository {
 
     }
 
-    public MyDisplayDto getMyDisplay(Long userId, int page) {
+    public DisplayDto getMyDisplay(Long userId, int page) {
 
         List<Display> displays = queryFactory.select(favoriteDisplay.display)
                 .from(favoriteDisplay)
                 .where(favoriteDisplay.user.userId.castToNum(Long.class).eq(userId))
-                .orderBy(favoriteDisplay.display.endDate.desc())
+                .orderBy(favoriteDisplay.display.endDate.asc())
                 .offset(page*10)
                 .limit(10)
                 .fetch();
@@ -66,18 +66,18 @@ public class MyPageRepository {
             displayList.add(eventDto);
         }
 
-        MyDisplayDto myDisplay = new MyDisplayDto(displayList);
+        DisplayDto myDisplay = new DisplayDto(displayList);
 
         return myDisplay;
 
     }
 
-    public MyFairDto getMyFair(Long userId, int page) {
+    public FairDto getMyFair(Long userId, int page) {
 
         List<Fair> fairs = queryFactory.select(favoriteFair.fair)
                 .from(favoriteFair)
                 .where(favoriteFair.user.userId.castToNum(Long.class).eq(userId))
-                .orderBy(favoriteFair.fair.endDate.desc())
+                .orderBy(favoriteFair.fair.endDate.asc())
                 .offset(page*10)
                 .limit(10)
                 .fetch();
@@ -89,18 +89,18 @@ public class MyPageRepository {
             fairList.add(eventDto);
         }
 
-        MyFairDto myFair = new MyFairDto(fairList);
+        FairDto myFair = new FairDto(fairList);
 
         return myFair;
 
     }
 
-    public MyFestivalDto getMyFestival(Long userId, int page) {
+    public FestivalDto getMyFestival(Long userId, int page) {
 
         List<Festival> festivals = queryFactory.select(favoriteFestival.festival)
                 .from(favoriteFestival)
                 .where(favoriteFestival.user.userId.castToNum(Long.class).eq(userId))
-                .orderBy(favoriteFestival.festival.endDate.desc())
+                .orderBy(favoriteFestival.festival.endDate.asc())
                 .offset(page*10)
                 .limit(10)
                 .fetch();
@@ -112,7 +112,7 @@ public class MyPageRepository {
             festivalList.add(eventDto);
         }
 
-        MyFestivalDto myFestival = new MyFestivalDto(festivalList);
+        FestivalDto myFestival = new FestivalDto(festivalList);
 
         return myFestival;
 

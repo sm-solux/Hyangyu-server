@@ -2,7 +2,7 @@ package hyangyu.server.api;
 
 import hyangyu.server.dto.ErrorDto;
 import hyangyu.server.dto.UserDto;
-import hyangyu.server.dto.myPage.*;
+import hyangyu.server.dto.event.*;
 import hyangyu.server.service.MyPageService;
 import hyangyu.server.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -49,8 +49,8 @@ public class MyPageApi {
             return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
         }
 
-        MyDisplayDto myDisplay = myPageService.getMyDisplay(user.getUserId(), page);
-        MyDisplayResponseDto myPageResponseDto = new MyDisplayResponseDto(200, myDisplay);
+        DisplayDto myDisplay = myPageService.getMyDisplay(user.getUserId(), page);
+        DisplayResponseDto myPageResponseDto = new DisplayResponseDto(200, myDisplay);
         return new ResponseEntity<>(myPageResponseDto, httpHeaders, HttpStatus.OK);
     }
 
@@ -64,8 +64,8 @@ public class MyPageApi {
             return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
         }
 
-        MyFairDto myFair = myPageService.getMyFair(user.getUserId(), page);
-        MyFairResponseDto myPageResponseDto = new MyFairResponseDto(200, myFair);
+        FairDto myFair = myPageService.getMyFair(user.getUserId(), page);
+        FairResponseDto myPageResponseDto = new FairResponseDto(200, myFair);
         return new ResponseEntity<>(myPageResponseDto, httpHeaders, HttpStatus.OK);
     }
 
@@ -79,8 +79,8 @@ public class MyPageApi {
             return new ResponseEntity(new ErrorDto(401, "유효하지 않은 사용자입니다."), HttpStatus.BAD_REQUEST);
         }
 
-        MyFestivalDto myFestival = myPageService.getMyFestival(user.getUserId(), page);
-        MyFestivalResponseDto myPageResponseDto = new MyFestivalResponseDto(200, myFestival);
+        FestivalDto myFestival = myPageService.getMyFestival(user.getUserId(), page);
+        FestivalResponseDto myPageResponseDto = new FestivalResponseDto(200, myFestival);
         return new ResponseEntity<>(myPageResponseDto, httpHeaders, HttpStatus.OK);
     }
 }
