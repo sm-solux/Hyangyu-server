@@ -1,13 +1,23 @@
 package hyangyu.server.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 public class ReviewDto {
+
     String photo;
+
     String username;
-    int score;
+
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "Asia/Seoul")
+    LocalDateTime createTime;
+
     String content;
+
+    int score;
 }
