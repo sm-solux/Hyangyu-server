@@ -17,4 +17,7 @@ public interface DisplayReviewRepository extends JpaRepository<DisplayReview, Lo
 
     @Query("select new hyangyu.server.dto.ReviewDto(r.user.image ,r.nickname, r.createTime, r.content, r.score) from DisplayReview r where r.display.displayId=?1")
     public List<ReviewDto> getDisplayReviews(Long displayId);
+
+    @Query("select new hyangyu.server.dto.ReviewDto(r.user.image, r.user.username, r.createTime, r.content, r.score) from DisplayReview r where r.user.userId=?1")
+    public List<ReviewDto> getMyDisplayReviews(Long userId);
 }
