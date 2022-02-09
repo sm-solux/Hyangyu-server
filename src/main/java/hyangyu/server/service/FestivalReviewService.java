@@ -30,7 +30,7 @@ public class FestivalReviewService {
         Optional<Festival> festival = festivalRepository.findOne(festivalId);
         int count = festivalReviewRepository.getCount(festival.get().getFestivalId(), user.get().getUserId());
         if (count == 0) {
-            FestivalReview festivalReview = FestivalReview.createFestivalReview(user.get(), festival.get(), user.get().getUsername(), LocalDateTime.now(), requestReviewDto.getContent(), requestReviewDto.getScore(), 0);
+            FestivalReview festivalReview = FestivalReview.createFestivalReview(user.get(), festival.get(), LocalDateTime.now(), requestReviewDto.getContent(), requestReviewDto.getScore(), 0);
             FestivalReview savedFestivalReview = festivalReviewRepository.save(festivalReview);
             return savedFestivalReview.getReviewId();
         } else {

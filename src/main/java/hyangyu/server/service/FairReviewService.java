@@ -33,7 +33,7 @@ public class FairReviewService {
         Optional<Fair> fair = fairRepository.findOne(fairId);
         int count = fairReviewRepository.getCount(fair.get().getFairId(), user.get().getUserId());
         if (count == 0) {
-            FairReview fairReview = FairReview.createFairReview(user.get(), fair.get(), user.get().getUsername(), LocalDateTime.now(), requestReviewDto.getContent(), requestReviewDto.getScore(), 0);
+            FairReview fairReview = FairReview.createFairReview(user.get(), fair.get(), LocalDateTime.now(), requestReviewDto.getContent(), requestReviewDto.getScore(), 0);
             FairReview savedFairReview = fairReviewRepository.save(fairReview);
             return savedFairReview.getReviewId();
         } else {
