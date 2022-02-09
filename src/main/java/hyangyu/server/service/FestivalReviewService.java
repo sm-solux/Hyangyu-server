@@ -2,6 +2,7 @@ package hyangyu.server.service;
 
 import hyangyu.server.domain.*;
 import hyangyu.server.dto.RequestReviewDto;
+import hyangyu.server.dto.ReviewDto;
 import hyangyu.server.repository.FestivalRepository;
 import hyangyu.server.repository.FestivalReviewRepository;
 import hyangyu.server.repository.FestivalWarnRepository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -74,5 +76,9 @@ public class FestivalReviewService {
         }
 
         return "신고가 완료되었습니다.";
+    }
+
+    public List<ReviewDto> getMyFestivalReviews(Long userId) {
+        return festivalReviewRepository.getMyFestivalReviews(userId);
     }
 }
