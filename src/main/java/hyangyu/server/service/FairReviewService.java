@@ -5,6 +5,7 @@ import hyangyu.server.domain.FairReview;
 import hyangyu.server.domain.FairWarn;
 import hyangyu.server.domain.User;
 import hyangyu.server.dto.RequestReviewDto;
+import hyangyu.server.dto.ReviewDto;
 import hyangyu.server.repository.FairRepository;
 import hyangyu.server.repository.FairReviewRepository;
 import hyangyu.server.repository.FairWarnRepository;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -77,5 +79,9 @@ public class FairReviewService {
         }
 
         return "신고가 완료되었습니다.";
+    }
+
+    public List<ReviewDto> getMyFairReviews(Long userId) {
+        return fairReviewRepository.getMyFairReviews(userId);
     }
 }

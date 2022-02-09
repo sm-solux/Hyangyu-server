@@ -85,4 +85,8 @@ public class DisplayReviewService {
     public List<ReviewDto> getDisplayReviews(Long displayId) {
         return displayReviewRepository.getDisplayReviews(displayId);
     }
+
+    public List<ReviewDto> getMyDisplayReviews(Long userId) {
+        return displayReviewRepository.getMyDisplayReviews(userId);
+    }
 }
